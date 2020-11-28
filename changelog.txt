@@ -1,1 +1,2 @@
+- v0.0.0.5: Virtuelle coordinaten fertig integriert & multiszenisch compatibel gemacht
 - v0.0.0.4: Start (basics hinzugefügt)
