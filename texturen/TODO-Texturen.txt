@@ -1,1 +1,2 @@
-.
+- Textur für den ersten Raum erstellen (oskar soll sich dafür mit thimo absprechen)
+    -blaue Wände vielleicht?
