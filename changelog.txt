@@ -1,3 +1,4 @@
+- v0.0.0.8: Movement code polish
 - v0.0.0.7: SuccessHandler & LockedCamMovement wurden verbessert
       bugfix: Objekt1 virtual transition von szene 3 zu 2 und von szene 2 zu 3
 - v0.0.0.6: Alle TF Variablen sind jetzt Teil einer public List
