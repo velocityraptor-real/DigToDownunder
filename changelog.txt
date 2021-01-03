@@ -1,5 +1,8 @@
+- v0.0.0.9: Movement code upgrade:
+      Weniger code, dafür effizienter und besser.
+      Coordinaten sind nicht mehr von der visuellen position abhängig.
 - v0.0.0.8: Movement code polish
-- v0.0.0.7: SuccessHandler & LockedCamMovement wurden verbessert
+- v0.0.0.7: SuccessHandler & LockedCamMovement upgrade
       bugfix: Objekt1 virtual transition von szene 3 zu 2 und von szene 2 zu 3
 - v0.0.0.6: Alle TF Variablen sind jetzt Teil einer public List
       bugfix: Kleiner visual bug beim Übergang von virtuellen Koordinaten zu normalen Koordinaten
