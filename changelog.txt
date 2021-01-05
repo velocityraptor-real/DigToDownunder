@@ -1,3 +1,4 @@
+- v0.0.0.9a: Code polish
 - v0.0.0.9: Movement code upgrade:
       Weniger code, dafür effizienter und besser.
       Coordinaten sind nicht mehr von der visuellen position abhängig.
