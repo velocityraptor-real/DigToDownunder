@@ -1,3 +1,6 @@
+- v0.0.0.13: Entities
+      Template Entity creiert.
+      Ein bisschen code polish.
 - v0.0.0.11: Interacting
 - v0.0.0.10: Room Collision
 - v0.0.0.9a: Code polish
