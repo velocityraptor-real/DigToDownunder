@@ -1,3 +1,6 @@
+- v0.0.0.15: Inventory start
+      inventory öffnen/schließen.
+      movement code wurde ein bisschen geändert.
 - v0.0.0.14: code upgrade.
       filesize ist zwar raufgegegangen, dafür ist der code jetzt ein bisschen besser (vielleicht auch effizienter)
 - v0.0.0.13: Entities
