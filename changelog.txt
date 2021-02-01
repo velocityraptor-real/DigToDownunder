@@ -1,3 +1,6 @@
+- v0.0.0.16: Erste implementation der Story ins spiel
+      Interaction code ein bisschen verändert.
+      szene1
 - v0.0.0.15: Inventory start
       inventory öffnen/schließen.
       movement code wurde ein bisschen geändert.
