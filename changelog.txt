@@ -1,3 +1,4 @@
+- v0.0.0.17: Code polish + bugfixes
 - v0.0.0.16: Erste implementation der Story ins spiel
       Interaction code ein bisschen verändert.
       szene1
