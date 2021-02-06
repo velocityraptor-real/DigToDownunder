@@ -1,3 +1,4 @@
+- v0.0.0.20: inventory update
 - v0.0.0.19: vodka
 - v0.0.0.18: Successhandling wurde verändert + code polish + bugfixes
 - v0.0.0.17: Code polish + bugfixes
