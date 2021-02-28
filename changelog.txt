@@ -1,3 +1,7 @@
+- v0.0.0.22: major code rewrite
+      object handling wurde komplett verändert.
+      kleine scenehandling tweaks
+      ab jetzt kann man texte mit 'ENTER' überspringen
 - v0.0.0.20: inventory update
 - v0.0.0.19: vodka
 - v0.0.0.18: Successhandling wurde verändert + code polish + bugfixes
