@@ -1,3 +1,4 @@
+- v0.0.0.23: movement code uprade & ein bisschen code cleanup.
 - v0.0.0.22: major code rewrite
       object handling wurde komplett verändert.
       kleine scenehandling tweaks
