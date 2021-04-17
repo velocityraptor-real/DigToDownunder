@@ -1,3 +1,4 @@
+- v0.0.0.35: gartenszene fertig + buggy layer code (~3h)
 - v0.0.0.34: büsche + kleiner movement fix
 - v0.0.0.32: barkeeper + gartenszene objecte
 - v0.0.0.31: utility update: neue nützliche Funktionen + Acting code upgrade
