@@ -1,4 +1,9 @@
-- v0.0.0.35: gartenszene fertig + buggy layer code (~3h)
+- v0.0.0.37: object update:
+      - komplett neuer object generation code;
+      - die berechnungen für die scenetransition sind jetzt queued;
+      - das buggy layer system wurde wieder entfernt;
+      - kleiner bugfix vom schließen des inventars in einer locked cam szene;
+- v0.0.0.35: gartenszene fertig + buggy layer system (~3h)
 - v0.0.0.34: büsche + kleiner movement fix
 - v0.0.0.32: barkeeper + gartenszene objecte
 - v0.0.0.31: utility update: neue nützliche Funktionen + Acting code upgrade
