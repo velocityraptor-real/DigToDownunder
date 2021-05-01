@@ -1,3 +1,4 @@
+- v0.0.0.41: tanz
 - v0.0.0.40: Hauptmenü Anfang + knöpfe + custom text writer update
 - v0.0.0.39: scene handler + custom text wirter + code polish
 - v0.0.0.38: bugfixes.
