@@ -1,3 +1,4 @@
+- v0.0.0.44: steine in der höhle + code polish beim locked cam shader
 - v0.0.0.43: bäume upgrade + golderze in der höhle
 - v0.0.0.41: tanz
 - v0.0.0.40: Hauptmenü Anfang + knöpfe + custom text writer update
