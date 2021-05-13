@@ -1,3 +1,7 @@
+- v0.0.0.45: code cleanup:
+      - code polish
+      - screenEffekte ind LChinterfründe sind jetzt vom Object code abgetrennt und sind ab jetzt ihr eigenet sprite
+      - das object-verhalten ist nach dem code stripping und rewrite etwas buggy, wird aber in der nächsten version gefixt.
 - v0.0.0.44: steine in der höhle + code polish beim locked cam shader
 - v0.0.0.43: bäume upgrade + golderze in der höhle
 - v0.0.0.41: tanz
