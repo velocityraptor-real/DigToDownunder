@@ -1,4 +1,4 @@
-- v0.0.0.45: code cleanup:
+- v0.0.0.45: code cleanup: (~4h)
       - code polish
       - screenEffekte ind LChinterfründe sind jetzt vom Object code abgetrennt und sind ab jetzt ihr eigenet sprite
       - das object-verhalten ist nach dem code stripping und rewrite etwas buggy, wird aber in der nächsten version gefixt.
