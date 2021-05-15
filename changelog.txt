@@ -1,3 +1,8 @@
+- v0.0.0.46 hackanimation: (~90min)
+      + hackanimation rechts
+      - object code bugfixes
+      - font generator upgrade
+      - minor code polish
 - v0.0.0.45: code cleanup: (~4h)
       - code polish
       - screenEffekte ind LChinterfründe sind jetzt vom Object code abgetrennt und sind ab jetzt ihr eigenet sprite
