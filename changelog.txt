@@ -1,3 +1,7 @@
+- v0.0.0.48: barszene verbessert
+      + erdbeere
+      - gebrauchte objekte speichern sich
+      - wenig code polish
 - v0.0.0.47: höhlenszene fertig: (~100min)
       + kollisionen
       + goldhacken
