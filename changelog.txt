@@ -1,3 +1,4 @@
+- v0.0.0.50: schlafzimmer verbessert
 - v0.0.0.49: elster + code polish
 - v0.0.0.48: barszene verbessert
       + erdbeere
