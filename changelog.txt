@@ -1,3 +1,6 @@
+- v0.0.0.52: Text update:
+      - alle Texte werden ab jetzt mit dem custom font generiert
+      - code polish
 - v0.0.0.51: hack update:
       - font golden gemacht
       + hackanimationen für alle richtungen
