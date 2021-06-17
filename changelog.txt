@@ -1,3 +1,12 @@
+- v0.0.0.53: Australien update!!!: (~4-8h)
+      + australien mit all seinen schönen häusern und bäumen
+      + collision code upgrade (u.a. directionale wände)
+      + inventory item amount data (wird angezeigt beim anklicken des items)
+      + grabstellen für scenetransition von garten -> höhle -> australien
+      - bugfixes:
+            - screen effect ID handling
+            - noch paar sachen. kann sie grad nicht konkret aufzählen...
+      - diesmal kein code polishing. screw you: filesize & performance!!
 - v0.0.0.52: Text update:
       - alle Texte werden ab jetzt mit dem custom font generiert
       - code polish
