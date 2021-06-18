@@ -1,3 +1,7 @@
+- v0.0.1: Alpha release:
+      + textren für himbeere & brombeere
+      + DTDU main theme (läuft während des genzen Spieles)
+      - minor cleanups
 - v0.0.0.53: Australien update!!!: (~4-8h)
       + australien mit all seinen schönen häusern und bäumen
       + collision code upgrade (u.a. directionale wände)
