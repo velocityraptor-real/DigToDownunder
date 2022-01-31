@@ -1,10 +1,15 @@
 package net.velocityworks.dtdu.objects;
 
+import static java.lang.System.out;
 import static net.velocityworks.dtdu.world.Registry.*;
+
+import net.velocityworks.dtdu.items.base.Item;
 import net.velocityworks.dtdu.util.Logger;
+import net.velocityworks.dtdu.world.Inventory;
 import net.velocityworks.dtdu.world.World;
 import net.velocityworks.dtdu.objects.base.Quest;
 public class Barkeeper extends Quest {
+	private static Item container;
 	public Barkeeper() {
 		super();
 	}
@@ -13,9 +18,16 @@ public class Barkeeper extends Quest {
 		this.icon = 'b';
 		this.name = "Barkeeper";
 	}
-//	@Override
-//	protected void questReward() {
-//	}
+	@Override
+	protected void questReward() {
+		container = Inventory.pickUp(stamperl, 1);
+		if(container == null) {
+			out.println("You aquired ein Stamperl!");
+			scanner.nextLine();
+		} else {
+			quest = false;
+		}
+	}
 	@Override
 	public boolean interaction(final int x, final int y) {
 		if(!quest) {
@@ -45,6 +57,7 @@ public class Barkeeper extends Quest {
 			quest = true;
 		}
 		if(!Logger.decision("Willst du zuerst noch etwas anderes machen, bevor du dein votka trinkst?", false)) {
+			completeQuest();
 			World.sceneTransition++;
 		}
 		return false;

@@ -6,7 +6,6 @@ import static net.velocityworks.dtdu.world.World.*;
 
 import java.util.Arrays;
 
-import net.velocityworks.dtdu.items.base.Item;
 import net.velocityworks.dtdu.objects.*;
 import net.velocityworks.dtdu.objects.base.*;
 
@@ -74,7 +73,7 @@ public class Map {
 				} else if(y == 5 && x == 11) {
 					set(barkeeper, x, y);
 				} else if(y == 9 && x == 12) {
-					set(new Harvestable(new Item(3, "Coin", 'c'), "Trashcan", 't'), x, y);
+					set(new Harvestable(coin, 3, "Trashcan", 't', "three Coins"), x, y);
 				}
 			}
 		}
@@ -94,7 +93,7 @@ public class Map {
 				} else if(y == 2 && x == 3) {
 					set(new Pickaxe(), x, y);
 				} else if(y == 7 && x == 7) {
-					set(new Gate(-1), x, y);
+					set(new Gate(2), x, y);
 				}
 			}
 		}
@@ -102,6 +101,22 @@ public class Map {
 	}
 	public static void genGarten() {
 		create(18, 12);
-		player.setLocation(4, 14);
+		wall.icon = 'H';
+		for(int y = 0; y < map.length; y++) {
+			for(int x = 0; x < map[y].length; x++) {
+				if(x > 10 && y > 2 && y < 5) {
+					set(wall, x, y);
+				} else if(y < 5 && x == 10) {
+					set(stoneWall, x, y);
+				} else if(((y == 5 || y == 6) && x == 8) || (y > 2 && y < 4 && (x == 9 || x == 4))) {
+					set(tree, x, y);
+				} else if((y == 4 && x == 7) || (y == 0 && x == 3)) {
+					set(rock, x, y);
+				} else if(y == 1 && x == 1) {
+					set(new Harvestable(erdbeere, 1, "Erdbeerbusch", 'e', "eine Erdbeere"), x, y);
+				}
+			}
+		}
+		player.setLocation(5, 14);
 	}
 }

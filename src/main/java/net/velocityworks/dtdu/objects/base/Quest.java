@@ -30,9 +30,6 @@ public class Quest extends Generic {
 		questReward();
 	}
 	protected void questReward() {
-		rewardMessage();
-	}
-	protected void rewardMessage() {
 		Logger.say(name, "Completed quest");
 	}
 }

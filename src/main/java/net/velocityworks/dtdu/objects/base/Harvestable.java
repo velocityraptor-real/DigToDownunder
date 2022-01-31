@@ -7,20 +7,17 @@ import net.velocityworks.dtdu.items.base.Item;
 import net.velocityworks.dtdu.world.Inventory;
 
 public class Harvestable extends Quest {
-	public Item container = null;
+	public Item container;
+	public int amount = 0;
+	protected String message = "something";
 	public Harvestable() {
 		super();
 	}
-	public Harvestable(final Item container) {
-		super();
-		this.container = container;
-	}
-	public Harvestable(final String name, final char icon) {
-		super(name, icon);
-	}
-	public Harvestable(final Item container, final String name, final char icon) {
+	public Harvestable(final Item container, final int amount, final String name, final char icon, final String message) {
 		super(name, icon);
 		this.container = container;
+		this.amount = amount;
+		this.message = message;
 	}
 	@Override
 	protected void attributes() {
@@ -30,25 +27,19 @@ public class Harvestable extends Quest {
 	@Override
 	protected void questReward() {
 		if(container == null) {
-			aquiredMessage("nothing");
+			out.println("You aquired nothing!");
+			scanner.nextLine();
 		} else {
-			rewardMessage();
-			container = Inventory.addToInventory(container);
-			if(container != null) {
+			container = Inventory.pickUp(container, amount);
+			if(container == null) {
+				rewardMessage();
+			} else {
 				quest = false;
 			}
 		}
 	}
-	@Override
 	protected void rewardMessage() {
-		if(container.amount > 1) {
-			aquiredMessage(container.amount + " " + container.name + "s");
-		} else {
-			aquiredMessage("a " + container.name);
-		}
-	}
-	protected void aquiredMessage(String itemName) {
-		out.println("You Aquired " + itemName + "!");
+		out.println("You aquired " + message + "!");
 		scanner.nextLine();
 	}
 }

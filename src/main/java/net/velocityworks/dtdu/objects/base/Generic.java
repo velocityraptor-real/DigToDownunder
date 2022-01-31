@@ -29,6 +29,9 @@ public class Generic {
 			scanner.nextLine();
 		}
 	}
+	public void setIcon(final char icon) {
+		this.icon = icon;
+	}
 	public void moveTo(final int fromX, final int fromY, final int toX, final int toY) {
 		if(Map.isInsideMap(toX, toY)) {
 			if(Map.hasSpace(toX, toY)) {

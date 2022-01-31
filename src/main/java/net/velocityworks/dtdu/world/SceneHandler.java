@@ -33,10 +33,12 @@ public class SceneHandler {
 	}
 	public static void renderInventory() {
 		String line = "-------------------";
+		out.println("---");
+		out.println("|" + (Inventory.equipSlot == null ? " " : Inventory.equipSlot.icon) + "|");
 		out.println(line);
-		for(int i = 0; i < itemInventory.length; i++) {
+		for(int i = 0; i < Inventory.length; i++) {
 			out.print("|");
-			Item item = itemInventory[i];
+			Item item = Inventory.main[i];
 			if(item == null) {
 				out.print(" ");
 			} else {

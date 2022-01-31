@@ -1,8 +1,17 @@
 package net.velocityworks.dtdu.util;
 
 public class Mathe {
-	public static int stringToInt(String s) {
-		return stringToInt(s, 10);
+	public static boolean isNumeric(String s) {
+		if(s == null || s.isEmpty()) {
+			return false;
+		}
+		for(int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
+			if(!Character.isDigit(c) && c != '-' && c != '.') {
+				return false;
+			}
+		}
+		return true;
 	}
 	public static int stringToInt(String s, final int basis) {
 		int output = 0, i = 0;
