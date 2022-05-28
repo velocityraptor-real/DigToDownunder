@@ -6,7 +6,7 @@ public abstract class Generic {
 	public abstract String getName();
 	public abstract char getIcon();
 	public abstract void interaction(final Generic o);
-	public void interactWith(final int x, final int y) {
+	public final void interactWith(final int x, final int y) {
 		Map.get(x, y).interaction(this);
 	}
 	public void moveTo(final int fromX, final int fromY, final int toX, final int toY) {

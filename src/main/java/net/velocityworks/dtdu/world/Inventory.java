@@ -1,23 +1,24 @@
 package net.velocityworks.dtdu.world;
 
 import static java.lang.System.out;
-import static net.velocityworks.dtdu.world.Registry.scanner;
+import static net.velocityworks.dtdu.world.Registry.*;
 import static net.velocityworks.dtdu.util.Logger.*;
 import static net.velocityworks.dtdu.Main.*;
 import static net.velocityworks.dtdu.util.Mathe.*;
 
-import net.velocityworks.dtdu.items.base.Item;
-import net.velocityworks.dtdu.items.base.Tool;
+import net.velocityworks.dtdu.items.base.*;
 import net.velocityworks.dtdu.util.Logger;
 
 public final class Inventory {
 	private Inventory() {}
 	public static final byte length = 27;
-	public static Item equipSlot, armorSlot, inventory[] = new Item[length];
+	public static Armor armorSlot;
+	public static Tool toolSlot;
+	public static Item inventory[] = new Item[length];
 	public static void run() {
 		String line = "-------------------";
 		out.println("-----");
-		out.println("|" + getIcon(equipSlot) + "|" + getIcon(armorSlot) + "|");
+		out.println("|" + getIcon(toolSlot) + "|" + getIcon(armorSlot) + "| Health: " + player.health);
 		out.println(line);
 		for(int i = 0; i < length; i++) {
 			out.print("|");
@@ -28,7 +29,6 @@ public final class Inventory {
 				out.println(line);
 			}
 		}
-		out.println("Select an Item");
 		controls();
 	}
 	static char getIcon(Item item) {
@@ -50,7 +50,7 @@ public final class Inventory {
 			if(inputbyte > length || inputbyte < -1) out.println(inputbyte + " is outside of Inventory main(1-27) equipSlot(0) armor(-1)");
 			else {
 				inputbyte--;
-				if(inputbyte == -1) interact(equipSlot);
+				if(inputbyte == -1) interact(toolSlot);
 				else if(inputbyte == -2) interact(armorSlot);
 				else {
 					Item selectedItem = inventory[inputbyte];
@@ -70,10 +70,12 @@ public final class Inventory {
 		out.println("Select an action");
 		switch(Logger.readInputChar(false, '?')) {
 		case 'e' -> {
-			if(item instanceof Tool) ((Tool) item).equip();
-			else out.println("You can't equip this item.");
+			if(item instanceof DurabilityItem) ((DurabilityItem) item).equip();
+			else {
+				out.println("You can't equip this item.");
+				scanner.nextLine();
+			}
 		}
-		case 'a' -> armor(item);
 		case 'u' -> item.use();
 		case 'd' -> remove(item);
 		case 'q' -> {
@@ -82,7 +84,6 @@ public final class Inventory {
 		case '?' -> {
 			out.println("Listing actions:");
 			out.println("e: (Un)Equip");
-			out.println("a: put on / take off armor");
 			out.println("u: Use");
 			out.println("d: Destroy");
 			out.println("q: Quit interaction");
@@ -92,17 +93,14 @@ public final class Inventory {
 		default -> Logger.errorEntry("There is no such action");
 		}
 	}
-	static void armor(Item item) {
-		//TODO: armor
-	}
 	public static void remove(Item item) {inventory[indexOf(item)] = null;}
 	public static boolean pickUp(Item item) {return pickUp(item, 1);}
 	public static boolean pickUp(Item item, int amount) {
 		if(item == null || amount == 0) return true;
 		out.println("You picked up " + amount + " " + item.name + "!");
 		scanner.nextLine();
-		if(equipSlot == item) {
-			equipSlot.amount += amount;
+		if(toolSlot == item) {
+			toolSlot.amount += amount;
 			return true;
 		}
 		byte slot = indexOf(item);

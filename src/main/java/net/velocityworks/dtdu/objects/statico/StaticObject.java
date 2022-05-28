@@ -1,7 +1,7 @@
 package net.velocityworks.dtdu.objects.statico;
 
 import static java.lang.System.out;
-import static net.velocityworks.dtdu.world.Registry.scanner;
+import static net.velocityworks.dtdu.world.Registry.*;
 
 import net.velocityworks.dtdu.objects.base.Generic;
 
@@ -14,8 +14,10 @@ public class StaticObject extends Generic {
 	}
 	@Override
 	public void interaction(final Generic o) {
-		out.println(name);
-		scanner.nextLine();
+		if(o == player) {
+			out.println(name);
+			scanner.nextLine();
+		}
 	}
 	@Override
 	public char getIcon() {return icon;}

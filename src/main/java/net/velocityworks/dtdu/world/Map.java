@@ -12,7 +12,10 @@ import java.util.*;
 
 import net.velocityworks.dtdu.objects.*;
 import net.velocityworks.dtdu.objects.base.*;
+import net.velocityworks.dtdu.objects.living.Enemy;
 import net.velocityworks.dtdu.objects.statico.*;
+import net.velocityworks.dtdu.objects.statico.type.EnemyType;
+import net.velocityworks.dtdu.objects.statico.type.HarvestType;
 import net.velocityworks.dtdu.util.*;
 
 public final class Map {
@@ -55,7 +58,7 @@ public final class Map {
 		return true;
 	}
 	public static boolean isInMap(final int x, final int y) {
-		return x < 0 || y < 0 || MAP.length <= y || MAP[y].length <= x;
+		return x > -1 && y > -1 && y < MAP.length && x < MAP[y].length;
 	}
 	public static void create(final int width, final int length) {
 		MAP = new Generic[length][width];
@@ -93,7 +96,7 @@ public final class Map {
 		};
 		genRoomWalls(wall);
 		set(new SOWP("Pianist", 'p', "Hallo!"), 10, 1);
-		new Harvestable(new Harvest("Trashcan", 't', coin, 3), 12, 9);
+		new Harvestable(new HarvestType("Trashcan", 't', coin, 3), 12, 9);
 		player.setLocation(5, 5);
 	}
 	private static void genSchlafzimmer() {
@@ -144,18 +147,20 @@ public final class Map {
 	private static void genHöhle() {
 		Logger.say(player.getName(), "Eine Höhle! Interessant. Mal sehen was es hier zu alles zu sehen gibt...");
 		Random random = new Random();
+		EnemyType steingolem = new EnemyType("Steingolem", 'm', 40F, 2.5F);
 		create(random.nextInt(9, 33), random.nextInt(9, 29));
-		for(int y = 0; y < MAP.length; y++) Arrays.fill(MAP, stoneWall);
-		hölenAusgang.setLocation(MAP.length - 2, MAP[0].length - 2);
+		for(int y = 0; y < MAP.length; y++) for(int x = 0; x < MAP[0].length; x++) set(stoneWall, x, y);
+		hölenAusgang.setLocation(MAP[0].length - 2, MAP.length - 2);
 		int x = 1, y = 1;
 		Direction direction = RIGHT;
 		caver:
 		while(get(x, y) != hölenAusgang) {
 			if(random.nextInt(9) == 0) new Harvestable(stone, true, x, y);
 			else if(random.nextInt(10) == 0) new Harvestable(gold_ore, true, x, y);
-			else set(null, x, y);
+			else if(random.nextInt(25) == 0) new Enemy(steingolem, false, x, y);
+			else remove(x, y);
 			int cx = 2 * getHorizontalM(direction) + x, cy = 2 * getVerticalM(direction) + y;
-			for(int tries = 8; !isInMap(cx, cy) || get(cx, cy) == null || direction != NONE || random.nextInt(4) == 0; tries--) {
+			for(int tries = 8; direction == NONE || random.nextInt(5) == 0 || !isInMap(cx, cy) || hasSpace(cx, cy); tries--) {
 				if(tries < 1) break caver;
 				direction = Direction.values()[random.nextInt(4)];
 				cx = 2 * getHorizontalM(direction) + x;
@@ -167,14 +172,14 @@ public final class Map {
 		x = hölenAusgang.getX();
 		y = hölenAusgang.getY() - 1;
 		player.setLocation(1, 1);
-		for(int tries = 100; get(x, y) != null; tries--) {
+		for(int tries = 255; !hasSpace(x, y); tries--) {
 			if(tries < 1) {
-				player.move(1, 1, hölenAusgang.getX(), hölenAusgang.getY() - 1);
+				player.setLocation(hölenAusgang.getX(), hölenAusgang.getY() - 1);
 				break;
 			}
-			set(null, x, y);
-			if(y < 2 || y % 2 == 0 && x > 1) x--;
-			if(x < 2 || x % 2 == 0 && y > 1) y--;
+			remove(x, y);
+			if(tries % 2 == 0 || y == 1 && x > 1) x--;
+			else if(y > 1) y--;
 		}
 	}
 }

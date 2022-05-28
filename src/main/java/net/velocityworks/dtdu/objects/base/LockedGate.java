@@ -1,7 +1,7 @@
 package net.velocityworks.dtdu.objects.base;
 
 import static java.lang.System.out;
-import static net.velocityworks.dtdu.world.Inventory.equipSlot;
+import static net.velocityworks.dtdu.world.Inventory.toolSlot;
 import static net.velocityworks.dtdu.world.Registry.scanner;
 
 import net.velocityworks.dtdu.items.base.Item;
@@ -16,7 +16,7 @@ public class LockedGate extends Gate {
 	}
 	@Override
 	public void interaction(Generic o) {
-		if(equipSlot == key) super.interaction(o);
+		if(toolSlot == key) super.interaction(o);
 		else {
 			out.println(getName() + " requires a " + key.name + " to use");
 			scanner.nextLine();

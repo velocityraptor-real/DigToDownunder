@@ -7,10 +7,6 @@ public class Item {
 	public final String name;
 	public char icon;
 	public int amount;
-	public Item() {
-		this.name = "Item";
-		this.icon = 'i';
-	}
 	public Item(final String name, final char icon) {
 		this.name = name;
 		this.icon = icon;

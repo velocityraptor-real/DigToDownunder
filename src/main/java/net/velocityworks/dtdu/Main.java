@@ -1,9 +1,11 @@
 package net.velocityworks.dtdu;
 
 import static java.lang.System.out;
-import static net.velocityworks.dtdu.world.Registry.player;
+
+import java.util.ArrayList;
 
 import net.velocityworks.dtdu.objects.base.Generic;
+import net.velocityworks.dtdu.objects.living.LivingObject;
 //import net.velocityworks.dtdu.util.*;
 import net.velocityworks.dtdu.world.*;
 
@@ -15,6 +17,7 @@ public final class Main {
 		SCENE_TRANSITION = SCENE,
 		PREVIOUS_SCENE = Scene.BAR;
 	public static Generic MAP[][];
+	public static ArrayList<LivingObject> ticklist = new ArrayList<LivingObject>();
 	
 	public static void main(String ... args) {
 		//TODO: Saving and loading
@@ -43,7 +46,7 @@ public final class Main {
 				if(INVENTORY_TOGGLE) Inventory.run();
 				else {
 					Map.render();
-					player.playerControl();
+					for(int i = 0; i < ticklist.size(); i++) ticklist.get(i).tick();
 				}
 			}
 		}

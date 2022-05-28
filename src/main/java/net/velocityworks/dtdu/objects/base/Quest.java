@@ -1,6 +1,6 @@
 package net.velocityworks.dtdu.objects.base;
 
-import static net.velocityworks.dtdu.world.Registry.scanner;
+import static net.velocityworks.dtdu.world.Registry.*;
 
 import net.velocityworks.dtdu.objects.statico.StaticObject;
 import net.velocityworks.dtdu.util.Logger;
@@ -24,6 +24,7 @@ public class Quest extends TrackedObject {
 	}
 	@Override
 	public void interaction(final Generic o) {
+		if(o != player) return;
 		if(quest) idleInteraction();
 		else if(questCondition()){
 			quest = true;

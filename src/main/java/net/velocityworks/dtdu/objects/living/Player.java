@@ -4,21 +4,19 @@ import static java.lang.System.out;
 import static net.velocityworks.dtdu.Main.*;
 import static net.velocityworks.dtdu.util.Logger.readInputChar;
 import static net.velocityworks.dtdu.util.Direction.*;
-import static net.velocityworks.dtdu.util.Mathe.*;
+import static net.velocityworks.dtdu.world.Inventory.*;
 
 import net.velocityworks.dtdu.Main;
 import net.velocityworks.dtdu.objects.base.Generic;
-import net.velocityworks.dtdu.objects.statico.StaticObject;
-import net.velocityworks.dtdu.util.Direction;
+import net.velocityworks.dtdu.objects.statico.type.LivingType;
 
-public class Player extends LivingObject {
-	private float armor;
+public final class Player extends LivingObject {
 	public Player() {
-		super(new StaticObject("Character", '&'));
+		super(new LivingType("Character", '&'));
 	}
-	public void playerControl() {
-		int mtX = x, mtY = y;
-		Direction direction = switch(readInputChar(false, ' ')) {
+	@Override
+	public void tick() {
+		move(switch(readInputChar(false, ' ')) {
 		case 'w' -> UP;
 		case 'a' -> LEFT;
 		case 's' -> DOWN;
@@ -40,18 +38,21 @@ public class Player extends LivingObject {
 		default -> {
 			out.println("Waiting...");
 			yield NONE;}
-		};
-		mtX += getHorizontalM(direction);
-		mtY += getVerticalM(direction);
-		moveTo(x, y, mtX, mtY);
+		});
 	}
 	@Override
 	public void damage(float amount) {
-		amount -= armor;
+		amount -= getArmor();
 		if(amount > 0F) super.damage(amount);
+		else super.damage(0.01F);
+	}
+	public float getArmor() {
+		return armorSlot == null ? 0F : armorSlot.armor;
 	}
 	@Override
 	protected void death() {Main.endGame();}
 	@Override
-	public void interaction(Generic o) {}
+	public void interaction(Generic o) {
+		if(o instanceof Enemy) damage(((Enemy) o).getBaseDamage());
+	}
 }
