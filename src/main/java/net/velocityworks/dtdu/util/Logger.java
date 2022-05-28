@@ -3,7 +3,8 @@ package net.velocityworks.dtdu.util;
 import static java.lang.System.*;
 import static net.velocityworks.dtdu.world.Registry.*;
 
-public class Logger {
+public final class Logger {
+	private Logger() {}
 	public static boolean decision(String entry, boolean preference) {
 		char c;
 		if(preference) {
@@ -20,10 +21,8 @@ public class Logger {
 	}
 	public static char readInputChar(final boolean caseSensitive, char assumption) {
 		String s = readInput();
-		if(s != null && !s.equals("")) {
-			if(!caseSensitive) {
-				s = s.toLowerCase();
-			}
+		if(s != null && !s.isEmpty()) {
+			if(!caseSensitive) s = s.toLowerCase();
 			return s.charAt(0);
 		} else return assumption;
 	}
@@ -37,10 +36,6 @@ public class Logger {
 	}
 	public static void inputEntry() {
 		out.print("<input>: ");
-	}
-	public static void logEntry(String sentence) {
-		out.println(sentence);
-		scanner.nextLine();
 	}
 	public static void debugEntry(String entry) {
 		out.println("[DEBUG] " + entry);

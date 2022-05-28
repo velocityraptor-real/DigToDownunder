@@ -1,35 +1,40 @@
 package net.velocityworks.dtdu.objects.base;
 
+import static net.velocityworks.dtdu.world.Registry.scanner;
+
+import net.velocityworks.dtdu.objects.statico.StaticObject;
 import net.velocityworks.dtdu.util.Logger;
 import net.velocityworks.dtdu.world.Map;
 
-public class Quest extends Generic {
-	public boolean quest = false;
-	public Quest() {
-		super();
+public class Quest extends TrackedObject {
+	public boolean removable, quest;
+	public Quest (final StaticObject o) {
+		super(o);
 	}
-	public Quest(final String name, final char icon) {
-		super(name, icon);
+	public Quest(final StaticObject o, final int x, final int y) {
+		super(o, x, y);
+	}
+	public Quest(final StaticObject o, final int x, final int y, boolean quest) {
+		super(o, x, y);
+		this.quest = quest;
+	}
+	public Quest(final StaticObject o, final boolean removable, final int x, final int y) {
+		super(o, x, y);
+		this.removable = removable;
 	}
 	@Override
-	protected void attributes() {
-		this.icon = 'q';
-		this.name = "ObjectWithQuest";
-	}
-	@Override
-	public boolean interaction(final int x, final int y) {
-		if(quest) {
-			Logger.say(Map.get(x, y).name, "You already completed this Quest");
-		} else {
-			completeQuest();
+	public void interaction(final Generic o) {
+		if(quest) idleInteraction();
+		else if(questCondition()){
+			quest = true;
+			questReward();
+			if(removable) Map.remove(x, y);
 		}
-		return false;
 	}
-	protected void completeQuest() {
-		quest = true;
-		questReward();
-	}
+	protected void idleInteraction() {super.interaction(null);}
+	protected boolean questCondition() {return true;}
 	protected void questReward() {
-		Logger.say(name, "Completed quest");
+		Logger.say(getName(), "Completed quest");
+		scanner.nextLine();
 	}
 }

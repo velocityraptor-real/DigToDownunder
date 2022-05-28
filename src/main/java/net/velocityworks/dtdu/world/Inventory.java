@@ -3,39 +3,59 @@ package net.velocityworks.dtdu.world;
 import static java.lang.System.out;
 import static net.velocityworks.dtdu.world.Registry.scanner;
 import static net.velocityworks.dtdu.util.Logger.*;
-import static net.velocityworks.dtdu.world.World.*;
+import static net.velocityworks.dtdu.Main.*;
 import static net.velocityworks.dtdu.util.Mathe.*;
 
 import net.velocityworks.dtdu.items.base.Item;
+import net.velocityworks.dtdu.items.base.Tool;
 import net.velocityworks.dtdu.util.Logger;
 
-public class Inventory {
+public final class Inventory {
+	private Inventory() {}
 	public static final byte length = 27;
-	public static Item equipSlot = null;
-	public static Item main[] = new Item[length];
-	public static void inventoryControl() {
+	public static Item equipSlot, armorSlot, inventory[] = new Item[length];
+	public static void run() {
+		String line = "-------------------";
+		out.println("-----");
+		out.println("|" + getIcon(equipSlot) + "|" + getIcon(armorSlot) + "|");
+		out.println(line);
+		for(int i = 0; i < length; i++) {
+			out.print("|");
+			Item item = inventory[i];
+			out.print(getIcon(item));
+			if(i % 9 == 8) {
+				out.println("|");
+				out.println(line);
+			}
+		}
 		out.println("Select an Item");
+		controls();
+	}
+	static char getIcon(Item item) {
+		return item == null ? ' ' : item.icon;
+	}
+	private static void controls() {
 		String input = readInput();
 		char inputChar = input.charAt(0);
-		if(inputChar == 'e') {
-			inventoryToggle = false;
-		} else if(inputChar == '?') {
-			out.println("Help: press 'e' to close Inventory or select an Item by typing 1-27(main inventory space) or 0(equipslot)");
-			inventoryControl();
+		if(inputChar == 'e') INVENTORY_TOGGLE = false;
+		else if(inputChar == '?') {
+			out.println("Help: press 'e' to close Inventory or select an Item by typing 1-27(main inventory space) or 0(equipslot) or -1(armor)");
+			controls();
 		} else {
-			while(!isNumeric(input)) {
-				out.println("Please enter a value");
-				input = readInput();
+			if(!isNumeric(input)) {
+				out.println("Please enter a valid control");
+				controls();
 			}
 			byte inputbyte = Byte.parseByte(input);
-			inputbyte--;
-			if(inputbyte == -1) {
-				interact(equipSlot);
-			} else if(inputbyte < length) {
-				Item selectedItem = main[inputbyte];
-				interact(selectedItem);
-			} else {
-				out.println((inputbyte + 1) + " is outside of Inventory main(1-27) equipSlot(0)");
+			if(inputbyte > length || inputbyte < -1) out.println(inputbyte + " is outside of Inventory main(1-27) equipSlot(0) armor(-1)");
+			else {
+				inputbyte--;
+				if(inputbyte == -1) interact(equipSlot);
+				else if(inputbyte == -2) interact(armorSlot);
+				else {
+					Item selectedItem = inventory[inputbyte];
+					interact(selectedItem);
+				}
 			}
 		}
 	}
@@ -49,72 +69,64 @@ public class Inventory {
 		out.println("Amount: " + item.amount);
 		out.println("Select an action");
 		switch(Logger.readInputChar(false, '?')) {
-		case 'e' -> equip(item);
+		case 'e' -> {
+			if(item instanceof Tool) ((Tool) item).equip();
+			else out.println("You can't equip this item.");
+		}
+		case 'a' -> armor(item);
 		case 'u' -> item.use();
 		case 'd' -> remove(item);
 		case 'q' -> {
 			return;
 		}
 		case '?' -> {
-			help();
+			out.println("Listing actions:");
+			out.println("e: (Un)Equip");
+			out.println("a: put on / take off armor");
+			out.println("u: Use");
+			out.println("d: Destroy");
+			out.println("q: Quit interaction");
+			scanner.nextLine();
 			interact(item);
 		}
 		default -> Logger.errorEntry("There is no such action");
 		}
 	}
-	private static void help() {
-		out.println("Listing actions:");
-		out.println("e: (Un)Equip");
-		out.println("u: Use");
-		out.println("d: Destroy");
-		out.println("q: Quit interaction");
+	static void armor(Item item) {
+		//TODO: armor
+	}
+	public static void remove(Item item) {inventory[indexOf(item)] = null;}
+	public static boolean pickUp(Item item) {return pickUp(item, 1);}
+	public static boolean pickUp(Item item, int amount) {
+		if(item == null || amount == 0) return true;
+		out.println("You picked up " + amount + " " + item.name + "!");
 		scanner.nextLine();
-	}
-	public static void equip(Item item) {
-		if(equipSlot == null) {
-			remove(item);
-			equipSlot = item;
-		} else if(equipSlot == item){
-			equipSlot = null;
-			item = add(item);
-			if(item != null) {
-				equipSlot = item;
-			}
-		} else {
-			remove(item);
-			add(equipSlot);
-			equipSlot = item;
+		if(equipSlot == item) {
+			equipSlot.amount += amount;
+			return true;
 		}
-	}
-	public static void remove(Item item) {
-		main[indexOf(item)] = null;
-	}
-	public static Item pickUp(Item item, int amount) {
 		byte slot = indexOf(item);
 		if(slot == -1) {
 			item.amount = amount;
-			return add(item);
+			return add(item) == null;
 		} else {
-			main[slot].amount += amount;
-			return null;
+			inventory[slot].amount += amount;
+			return true;
 		}
 	}
 	public static Item add(Item item) {
 		for(byte b = 0; b < length; b++) {
-			if(main[b] == null) {
-				main[b] = item;
+			if(inventory[b] == null) {
+				inventory[b] = item;
 				return null;
 			}
 		}
 		out.println("Inventory full");
+		scanner.nextLine();
 		return item;
 	}
-	public static byte indexOf(Item item) {
-		for(byte b = 0; b < length; b++) {
-			if(main[b] == item) {
-				return b;
-			}
-		}
+	static byte indexOf(Item item) {
+		for(byte b = 0; b < length; b++) if(inventory[b] == item) return b;
 		return -1;
 	}
 }

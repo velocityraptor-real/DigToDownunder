@@ -4,27 +4,25 @@ import static java.lang.System.out;
 import static net.velocityworks.dtdu.world.Registry.scanner;
 
 public class Item {
-	public String name;
+	public final String name;
 	public char icon;
-	public int amount = 1;
+	public int amount;
 	public Item() {
-		attributes();
+		this.name = "Item";
+		this.icon = 'i';
 	}
 	public Item(final String name, final char icon) {
 		this.name = name;
 		this.icon = icon;
+		this.amount = 1;
 	}
 	public Item(final String name, final char icon, final int amount) {
 		this.name = name;
 		this.icon = icon;
 		this.amount = amount;
 	}
-	protected void attributes() {
-		this.icon = 'i';
-		this.name = "Item";
-	}
 	public void use() {
-		out.println("This item has no use");
+		out.println("You can't use " + name + " in that way");
 		scanner.nextLine();
 	}
 }

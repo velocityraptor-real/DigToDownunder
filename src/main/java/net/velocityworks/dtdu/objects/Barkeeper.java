@@ -1,65 +1,48 @@
 package net.velocityworks.dtdu.objects;
 
-import static java.lang.System.out;
 import static net.velocityworks.dtdu.world.Registry.*;
+import static net.velocityworks.dtdu.Main.*;
 
-import net.velocityworks.dtdu.items.base.Item;
+import net.velocityworks.dtdu.objects.base.*;
+import net.velocityworks.dtdu.objects.statico.StaticObject;
 import net.velocityworks.dtdu.util.Logger;
-import net.velocityworks.dtdu.world.Inventory;
-import net.velocityworks.dtdu.world.World;
-import net.velocityworks.dtdu.objects.base.Quest;
-public class Barkeeper extends Quest {
-	private static Item container;
+import net.velocityworks.dtdu.world.*;
+
+public class Barkeeper extends SilentQuest {
 	public Barkeeper() {
-		super();
+		super(new StaticObject("Barkeeper", 'b'));
 	}
 	@Override
-	protected void attributes() {
-		this.icon = 'b';
-		this.name = "Barkeeper";
+	protected void idleInteraction() {
+		if(!Logger.decision("Willst du zuerst noch etwas anderes machen, bevor du dein votka trinkst?", false)) SCENE_TRANSITION = Scene.SCHLAFZIMMER;
 	}
 	@Override
-	protected void questReward() {
-		container = Inventory.pickUp(stamperl, 1);
-		if(container == null) {
-			out.println("You aquired ein Stamperl!");
-			scanner.nextLine();
-		} else {
-			quest = false;
-		}
+	public boolean questCondition() {
+		String cName = player.getName();
+		Logger.say(getName(), "Hallo Mensch!");
+		Logger.say(getName(), "Du siehst mï¿½de aus...");
+		Logger.say(getName(), "gibt in deiner alten Mine wohl nicht mehr viel zu holen...");
+		Logger.say(cName, "Ja leider...");
+		Logger.say(cName, "Ich hab mir schon mal ï¿½berlegt wegzuziehen");
+		Logger.say(cName, "irgendwohin wo es mehr Gold gibt.");
+		Logger.say(getName(), "Man sagt dass es in Australien Berge voll Gold gibt...");
+		Logger.say(getName(), "Sag blos du willst nach Australien...");
+		Logger.say(cName, ".");
+		Logger.say(getName(), "Und wie willst du das anstellen?");
+		Logger.say(getName(), "Du bist so gut wie Pleite.");
+		Logger.say(cName, "Naja, ich habe nicht viel...");
+		Logger.say(cName, "aber ich habe noch meine Spitzhacke...");
+		Logger.say(cName, "also...");
+		Logger.say(getName(), "Haha willst du dich etwa nach Australien graben?");
+		Logger.say(cName, "WeiÃŸt du was...");
+		Logger.say(cName, "genau das werde ich tun!");
+		Logger.say(getName(), "HAhaHAHAHhahA");
+		Logger.say(getName(), "Schick mir eine Karte wenn du angekommen bist HAhaHa");
+		Logger.say(getName(), "..haha..ha...");
+		Logger.say(getName(), "Hier.");
+		Logger.say(getName(), "Trink erst mal dein Vodka.");
+		return Inventory.pickUp(stamperl);
 	}
 	@Override
-	public boolean interaction(final int x, final int y) {
-		if(!quest) {
-			String cName = player.name;
-			Logger.say(name, "Hallo Mensch!");
-			Logger.say(name, "Du siehst müde aus...");
-			Logger.say(name, "gibt in deiner alten Mine wohl nicht mehr viel zu holen...");
-			Logger.say(cName, "Ja leider...");
-			Logger.say(cName, "Ich hab mir schon mal überlegt wegzuziehen");
-			Logger.say(cName, "irgendwohin wo es mehr Gold gibt.");
-			Logger.say(name, "Man sagt dass es in Australien Berge voll Gold gibt...");
-			Logger.say(name, "Sag blos du willst nach Australien...");
-			Logger.say(cName, ".");
-			Logger.say(name, "Und wie willst du das anstellen?");
-			Logger.say(name, "Du bist so gut wie Pleite.");
-			Logger.say(cName, "Naja, ich habe nicht viel...");
-			Logger.say(cName, "aber ich habe noch meine Spitzhacke...");
-			Logger.say(cName, "also...");
-			Logger.say(name, "Haha willst du dich etwa nach Australien graben?");
-			Logger.say(cName, "Weißt du was...");
-			Logger.say(cName, "genau das werde ich tun!");
-			Logger.say(name, "HAhaHAHAHhahA");
-			Logger.say(name, "Schick mir eine Karte wenn du angekommen bist HAhaHa");
-			Logger.say(name, "..haha..ha...");
-			Logger.say(name, "Hier.");
-			Logger.say(name, "Trink erst mal dein Vodka.");
-			quest = true;
-		}
-		if(!Logger.decision("Willst du zuerst noch etwas anderes machen, bevor du dein votka trinkst?", false)) {
-			completeQuest();
-			World.sceneTransition++;
-		}
-		return false;
-	}
+	protected void questReward() {idleInteraction();}
 }

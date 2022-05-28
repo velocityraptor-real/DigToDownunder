@@ -1,21 +1,18 @@
 package net.velocityworks.dtdu.objects.base;
 
-import net.velocityworks.dtdu.world.World;
+import static net.velocityworks.dtdu.Main.*;
 
-public class Gate extends Generic {
-	protected int sceneGate;
-	public Gate(final int sceneGate) {
-		super();
+import net.velocityworks.dtdu.objects.statico.StaticObject;
+import net.velocityworks.dtdu.world.Scene;
+
+public class Gate extends TrackedObject {
+	protected final Scene sceneGate;
+	public Gate(final StaticObject o, final int x, final int y, Scene sceneGate) {
+		super(o, x, y);
 		this.sceneGate = sceneGate;
 	}
 	@Override
-	public void attributes() {
-		this.icon = 'D';
-		this.name = "Door";
-	}
-	@Override
-	public boolean interaction(final int x, final int y) {
-		World.sceneTransition = sceneGate;
-		return false;
+	public void interaction(Generic o) {
+		SCENE_TRANSITION = sceneGate;
 	}
 }
