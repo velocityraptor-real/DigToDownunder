@@ -8,7 +8,7 @@ import net.velocityworks.dtdu.objects.statico.StaticObject;
 import net.velocityworks.dtdu.util.Logger;
 import net.velocityworks.dtdu.world.*;
 
-public class Barkeeper extends SilentQuest {
+public class Barkeeper extends Quest {
 	public Barkeeper() {
 		super(new StaticObject("Barkeeper", 'b'));
 	}

@@ -3,7 +3,6 @@ package net.velocityworks.dtdu.objects.base;
 import static net.velocityworks.dtdu.world.Registry.*;
 
 import net.velocityworks.dtdu.objects.statico.StaticObject;
-import net.velocityworks.dtdu.util.Logger;
 import net.velocityworks.dtdu.world.Map;
 
 public class Quest extends TrackedObject {
@@ -34,8 +33,5 @@ public class Quest extends TrackedObject {
 	}
 	protected void idleInteraction() {super.interaction(null);}
 	protected boolean questCondition() {return true;}
-	protected void questReward() {
-		Logger.say(getName(), "Completed quest");
-		scanner.nextLine();
-	}
+	protected void questReward() {}
 }

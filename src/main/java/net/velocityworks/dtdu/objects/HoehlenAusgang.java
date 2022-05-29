@@ -9,8 +9,8 @@ import net.velocityworks.dtdu.objects.base.TrackedObject;
 import net.velocityworks.dtdu.objects.statico.StaticObject;
 import net.velocityworks.dtdu.util.Logger;
 
-public final class HoelenAusgang extends TrackedObject {
-	public HoelenAusgang() {
+public final class HoehlenAusgang extends TrackedObject {
+	public HoehlenAusgang() {
 		super(new StaticObject("Höhlenausgang", 'x'));
 	}
 	@Override

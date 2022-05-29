@@ -22,7 +22,7 @@ public final class Map {
 	private Map() {}
 	public static void render() {
 		out.println("Place: " + SCENE);
-		out.println("Location: " + (SCENE == HÖHLE ? "Underground" : "Neuseeland"));
+		out.println("Location: " + getLocation());
 		for(int y = 0; y < MAP.length; y++) {
 			for(int x = 0; x < MAP[0].length; x++) {
 				char c = getIcon(x, y);
@@ -31,12 +31,20 @@ public final class Map {
 			out.println();
 		}
 	}
+	private static String getLocation() {
+		return switch(SCENE) {
+		case HÖHLE -> "Underground";
+		case MEXICO -> "Mexico";
+		default -> "Neuseeland";
+		};
+	}
 	public static void generate(Scene scene) {
 		switch(scene) {
 		case BAR -> genBar();
 		case SCHLAFZIMMER -> genSchlafzimmer();
 		case GARTEN -> genGarten();
 		case HÖHLE -> genHöhle();
+		case MEXICO -> genMexico();
 		default -> endGame();
 		}
 	}
@@ -119,6 +127,7 @@ public final class Map {
 	}
 	private static void genGarten() {
 		create(18, 12);
+		StaticObject house = new StaticObject("House", 'H');
 		for(int y = 0; y < MAP.length; y++) for(int x = 0; x < MAP[y].length; x++) {
 			if(x > 10 && y > 0 && y < 4) set(house, x, y);
 			else if(y < 5 && x == 10) set(stoneWall, x, y);
@@ -132,14 +141,16 @@ public final class Map {
 		new Harvestable(gold_ore, true, 2, 0);
 		new Harvestable(gold_ore, true, 2, 6);
 		new Harvestable(gold_ore, true, 17, 9);
+		StaticObject tree = new StaticObject("Tree", 'T');
 		set(tree, 3, 3);
 		set(tree, 9, 4);
 		set(tree, 1, 11);
 		set(tree, 8, 6);
 		new Harvestable(stone, true, 3, 0);
+		StaticObject rock = new StaticObject("Rock", 'R');
 		set(rock, 7, 4);
 		set(rock, 0, 11);
-		new SilentQuest(new StaticObject("Sparrow", 'ß'), true, 6, 9);
+		new Quest(new StaticObject("Sparrow", 'ß'), true, 6, 9);
 		new LockedGate(new StaticObject("Grabstelle", 'x'), 4, 5, HÖHLE, pickaxe);
 		new Gate(door, 14, 3, SCHLAFZIMMER);
 		player.setLocation(14, 4);
@@ -150,11 +161,11 @@ public final class Map {
 		EnemyType steingolem = new EnemyType("Steingolem", 'm', 40F, 2.5F);
 		create(random.nextInt(9, 33), random.nextInt(9, 29));
 		for(int y = 0; y < MAP.length; y++) for(int x = 0; x < MAP[0].length; x++) set(stoneWall, x, y);
-		hölenAusgang.setLocation(MAP[0].length - 2, MAP.length - 2);
+		höhlenAusgang.setLocation(MAP[0].length - 2, MAP.length - 2);
 		int x = 1, y = 1;
 		Direction direction = RIGHT;
 		caver:
-		while(get(x, y) != hölenAusgang) {
+		while(get(x, y) != höhlenAusgang) {
 			if(random.nextInt(9) == 0) new Harvestable(stone, true, x, y);
 			else if(random.nextInt(10) == 0) new Harvestable(gold_ore, true, x, y);
 			else if(random.nextInt(25) == 0) new Enemy(steingolem, false, x, y);
@@ -169,17 +180,20 @@ public final class Map {
 			x += getHorizontalM(direction);
 			y += getVerticalM(direction);
 		}
-		x = hölenAusgang.getX();
-		y = hölenAusgang.getY() - 1;
+		x = höhlenAusgang.getX();
+		y = höhlenAusgang.getY() - 1;
 		player.setLocation(1, 1);
 		for(int tries = 255; !hasSpace(x, y); tries--) {
 			if(tries < 1) {
-				player.setLocation(hölenAusgang.getX(), hölenAusgang.getY() - 1);
+				player.setLocation(höhlenAusgang.getX(), höhlenAusgang.getY() - 1);
 				break;
 			}
 			remove(x, y);
 			if(tries % 2 == 0 || y == 1 && x > 1) x--;
 			else if(y > 1) y--;
 		}
+	}
+	private static void genMexico() {
+		
 	}
 }

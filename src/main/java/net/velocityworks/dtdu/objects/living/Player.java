@@ -27,7 +27,7 @@ public final class Player extends LivingObject {
 		}
 		case '?' -> {
 			out.println("Listing actions:");
-			out.println("wasd: Movement");
+			out.println("wasd: Movement (You are the '&' on screen)");
 			out.println("#: Force end game");
 			out.println("e: Open Inventory");
 			yield NONE;

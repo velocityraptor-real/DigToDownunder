@@ -10,11 +10,12 @@ import net.velocityworks.dtdu.objects.statico.*;
 import net.velocityworks.dtdu.objects.statico.type.HarvestType;
 import net.velocityworks.dtdu.objects.statico.type.ToolHarvest;
 
-public class Registry {
+public final class Registry {
+	private Registry() {}
 	public static final Scanner scanner = new Scanner(System.in);
 	
 	public static final Player player = new Player();
-	public static final HoelenAusgang hölenAusgang = new HoelenAusgang();
+	public static final HoehlenAusgang höhlenAusgang = new HoehlenAusgang();
 	
 	public static final Item
 		coin = new Item("Coin", 'c'),
@@ -30,10 +31,7 @@ public class Registry {
 		chair = new StaticObject("Chair", 'C'),
 		bed = new StaticObject("Bed", 'B'),
 		stoneWall = new StaticObject("Stone_Wall", 'S'),
-		tree = new StaticObject("Tree", 'T'),
-		rock = new StaticObject("Rock", 'R'),
-		door = new StaticObject("Door", 'd'),
-		house = new StaticObject("House", 'H');
+		door = new StaticObject("Door", 'd');
 	
 	public static final HarvestType
 		erdbeerbusch = new HarvestType("Erdbeerbusch", 'e', new Food("Erdbeere", 'e')),

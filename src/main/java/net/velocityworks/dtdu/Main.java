@@ -5,7 +5,6 @@ import static java.lang.System.out;
 import java.util.ArrayList;
 
 import net.velocityworks.dtdu.objects.base.Generic;
-import net.velocityworks.dtdu.objects.living.LivingObject;
 //import net.velocityworks.dtdu.util.*;
 import net.velocityworks.dtdu.world.*;
 
@@ -17,7 +16,7 @@ public final class Main {
 		SCENE_TRANSITION = SCENE,
 		PREVIOUS_SCENE = Scene.BAR;
 	public static Generic MAP[][];
-	public static ArrayList<LivingObject> ticklist = new ArrayList<LivingObject>();
+	public static ArrayList<Tickable> ticklist = new ArrayList<Tickable>();
 	
 	public static void main(String ... args) {
 		//TODO: Saving and loading
@@ -33,7 +32,7 @@ public final class Main {
 //			location = Logger.readInput();
 //			create(location + ".dtdu");
 //		}
-		out.println("Starting game...");
+		out.println("Starting game...\nFor help enter '?'");
 		//Game
 		while(true) {
 			Map.generate(SCENE);

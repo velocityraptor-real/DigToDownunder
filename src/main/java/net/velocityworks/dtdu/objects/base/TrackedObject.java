@@ -1,16 +1,16 @@
 package net.velocityworks.dtdu.objects.base;
 
+import net.velocityworks.dtdu.objects.ai.Moving;
 import net.velocityworks.dtdu.objects.statico.StaticObject;
 
-public class TrackedObject extends Generic {
-	public final StaticObject staticPart;
+public class TrackedObject extends TypableObject implements Moving {
 	protected int x;
 	protected int y;
 	public TrackedObject(final StaticObject o) {
-		staticPart = o;
+		super(o);
 	}
 	public TrackedObject(final StaticObject o, final int x, final int y) {
-		staticPart = o;
+		super(o);
 		setLocation(x, y);
 	}
 	public int getX() {return x;}
@@ -21,10 +21,4 @@ public class TrackedObject extends Generic {
 		this.x = x;
 		this.y = y;
 	}
-	@Override
-	public void interaction(Generic o) {staticPart.interaction(null);}
-	@Override
-	public char getIcon() {return staticPart.getIcon();}
-	@Override
-	public String getName() {return staticPart.getName();}
 }

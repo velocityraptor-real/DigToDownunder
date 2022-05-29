@@ -22,8 +22,7 @@ public final class Inventory {
 		out.println(line);
 		for(int i = 0; i < length; i++) {
 			out.print("|");
-			Item item = inventory[i];
-			out.print(getIcon(item));
+			out.print(getIcon(inventory[i]));
 			if(i % 9 == 8) {
 				out.println("|");
 				out.println(line);
@@ -67,6 +66,7 @@ public final class Inventory {
 		}
 		out.println(item.name);
 		out.println("Amount: " + item.amount);
+		if(item instanceof DurabilityItem) out.println("Remaining uses: " + ((DurabilityItem) item).durability);
 		out.println("Select an action");
 		switch(Logger.readInputChar(false, '?')) {
 		case 'e' -> {

@@ -4,13 +4,13 @@ import static java.lang.System.out;
 import static net.velocityworks.dtdu.world.Inventory.toolSlot;
 import static net.velocityworks.dtdu.world.Registry.scanner;
 
-import net.velocityworks.dtdu.items.base.Item;
+import net.velocityworks.dtdu.items.base.Tool;
 import net.velocityworks.dtdu.objects.statico.StaticObject;
 import net.velocityworks.dtdu.world.Scene;
 
 public class LockedGate extends Gate {
-	private final Item key;
-	public LockedGate(final StaticObject o, final int x, final int y, Scene sceneGate, final Item key) {
+	private final Tool key;
+	public LockedGate(final StaticObject o, final int x, final int y, Scene sceneGate, final Tool key) {
 		super(o, x, y, sceneGate);
 		this.key = key;
 	}
