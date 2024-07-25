@@ -1,4 +1,6 @@
 /target/
 target/classes/META-INF/maven/velocityworks/DigToDownunder/pom.properties
 target/classes/META-INF/maven/velocityworks/DigToDownunder/pom.properties
-*.properties
+saves
+data.dtdu
+bin
