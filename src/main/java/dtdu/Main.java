@@ -5,6 +5,7 @@ import java.awt.event.*;
 import java.io.*;
 import java.util.Scanner;
 
+import main.java.dtdu.engine.Sounds;
 import main.java.dtdu.engine.Ticker;
 import main.java.dtdu.util.*;
 import main.java.dtdu.world.*;
@@ -54,5 +55,6 @@ public class Main {
 		frame.setVisible(true);
 		render();
 		Ticker.ticker.start();
+		Sounds.mainTheme.play();
 	}
 }

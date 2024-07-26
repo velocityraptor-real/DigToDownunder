@@ -1,0 +1,1 @@
+Audio File format: WAV with signed 16-bit PCM compression

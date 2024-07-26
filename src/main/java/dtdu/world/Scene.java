@@ -26,6 +26,8 @@ public enum Scene {
 		}
 		@Override
 		public void sceneTransitionFrom(Scene from) {
+			Sounds.mainTheme.setVolume(1F);
+			if(from != BAR) Sounds.mainTheme.play();
 			mainMenuScreen.toggleName(false);
 			mainMenuScreen.toggleBack(false);
 			mainMenuScreen.toggleConfirm(false);
@@ -56,6 +58,8 @@ public enum Scene {
 		}
 		@Override
 		public void sceneTransitionFrom(Scene from) {
+			Sounds.mainTheme.setVolume(.5F);
+			if(!Sounds.mainTheme.isPlaying()) Sounds.mainTheme.resume();
 			super.sceneTransitionFrom(from);
 		}
 		@Override
