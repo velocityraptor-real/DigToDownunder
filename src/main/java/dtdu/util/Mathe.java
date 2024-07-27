@@ -5,11 +5,19 @@ import java.util.List;
 public class Mathe {
 	public static <T extends Comparable<T>> void binaryRemove(List<T> array, T value) {
 		int i = binarySearch(array, value);
-		if(i != -1) array.remove(i);
-		else {
-			System.err.print(value + " Not in Array: ");
-			synchronized(array) {for(T t : array) System.err.print(t + ", ");}
-		}
+		if(i != -1) synchronized(array) {
+			if(array.get(i) == value) array.remove(i);
+			else {
+				T v; int j = i;
+				while((v = array.get(--i)).compareTo(value) == 0) if(v == value) {
+					array.remove(i);
+					return;
+				} while((v = array.get(++j)).compareTo(value) == 0) if(v == value) {
+					array.remove(j);
+					return;
+				} System.err.println(value + " not in Array!");
+			}
+		} else System.err.println(value + " not in Array!");
 	}
 	public static <T extends Comparable<T>> int binarySearch(List<T> array, T value) {
 		synchronized(array) {if(array.size() > 0) {

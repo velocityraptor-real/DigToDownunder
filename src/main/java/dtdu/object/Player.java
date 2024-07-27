@@ -9,9 +9,9 @@ import main.java.dtdu.util.Direction;
 import main.java.dtdu.world.Save;
 
 public class Player extends Living {
-	private int image = 5;
+	public int image = 5;
 	public volatile boolean upKey = false, downKey = false, leftKey = false, rightKey = false;
-	private boolean walkAnim = false;
+	public boolean walkAnim = false;
 	int tickCount = 0;
 	@Override public float getMaxHealth() {return 100F;}
 	public Player(float x, float y, byte[] data) {

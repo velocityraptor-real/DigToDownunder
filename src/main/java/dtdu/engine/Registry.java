@@ -3,13 +3,12 @@ package main.java.dtdu.engine;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import main.java.dtdu.graphics.Language;
-import main.java.dtdu.graphics.Textures;
+import main.java.dtdu.graphics.*;
 import main.java.dtdu.graphics.gui.Dialogue;
 import main.java.dtdu.item.ItemCreator;
 import main.java.dtdu.item.base.Item;
 import main.java.dtdu.object.*;
-import main.java.dtdu.object.bar.Pianist;
+import main.java.dtdu.object.bar.*;
 import main.java.dtdu.object.base.*;
 import main.java.dtdu.util.*;
 import main.java.dtdu.world.Save;
@@ -58,6 +57,7 @@ public interface Registry {
 		register("player", Player::new);
 		//Bar
 		register("pianist", Pianist::new);
+		register("chair", Chair::new);
 		register(new GameObject() {
 			@Override public String getRegistryName() {return "trash_can";}
 			public Direction interacted(GameObject from, Direction direction) {

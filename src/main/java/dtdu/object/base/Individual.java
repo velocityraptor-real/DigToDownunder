@@ -142,7 +142,7 @@ public class Individual extends GameObject implements Comparable<Individual> {
 	}
 	@Override
 	public int compareTo(Individual o) {
-		return o == null || y > o.y || (y == o.y && x > o.x) ? 1 : (x == o.x && y == o.y ? (o == this ? 0 : -1) : -1);
+		return o == null || y > o.y || (y == o.y && x > o.x) ? 1 : (x == o.x && y == o.y ? 0 : -1);
 	}
 	@Override
 	public String toString() {

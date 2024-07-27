@@ -16,7 +16,7 @@ public class Textures {
 	public static final Color gold = new Color(0xc8b83f);
 	public static BufferedImage button_idle, button_hover, button_active, bar_background, vignette, inventory, handslot, highlight;
 	public static BufferedImage coin;
-	public static BufferedImage trashcan;
+	public static BufferedImage trashcan, chair_left, chair_right;
 	public static BufferedImage[] font, pianist, player;
 	static {
 		try {
@@ -40,6 +40,8 @@ public class Textures {
 			});
 			//Objects
 			trashcan = load("objects/general/trashcan");
+			chair_left = load("objects/general/chair_left");
+			chair_right = load("objects/general/chair_right");
 			//Items
 			coin = load("items/coin");
 		} catch (IOException e) {Main.printError(e);}
@@ -60,7 +62,8 @@ public class Textures {
 					"character/goldgraeber/Tanzmooves/t15", "character/goldgraeber/Tanzmooves/t16", "character/goldgraeber/Tanzmooves/t17",
 					"character/goldgraeber/Tanzmooves/t18", "character/goldgraeber/Tanzmooves/t19", "character/goldgraeber/Tanzmooves/t20",
 					"character/goldgraeber/Tanzmooves/t21", "character/goldgraeber/Tanzmooves/t22", "character/goldgraeber/Tanzmooves/t23",
-					"character/goldgraeber/Tanzmooves/t24", "character/goldgraeber/Tanzmooves/t25"
+					"character/goldgraeber/Tanzmooves/t24", "character/goldgraeber/Tanzmooves/t25",
+					"character/goldgraeber/rs", "character/goldgraeber/ls"
 			});
 		} catch (IOException e) {Main.printError(e);}
 	}

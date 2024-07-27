@@ -24,15 +24,18 @@ public class Language {
 		default -> new File("./src/main/resources/assets/lang/en.txt");//'#'
 		}, StandardCharsets.UTF_8)) {
 			int c = 0;
+			StringBuilder key, value;
 			while(c != -1) {
-				StringBuilder key = new StringBuilder(), value = new StringBuilder();
+				key = new StringBuilder();
+				value = new StringBuilder();
 				while((c = reader.read()) != ' ' && c != -1) key.append((char) c);
 				while((c = reader.read()) != '\n' && c != -1) value.append((char) c);
-				lang.VALUES.add(Mathe.binaryInsert(lang.KEYS, key.toString()), value.toString());
+				if(c == -1) break;
+				lang.VALUES.add(Mathe.binaryInsert(lang.KEYS, key.toString()), value.substring(0, value.length() - 1));
 			}
 		} catch(IOException e) {Main.printError(e);}
 //		System.out.println("Constructed Language:");
-//		for(int i = 0; i < lang.VALUES.size(); i++) System.out.println(lang.KEYS.get(i) + " -> " + lang.VALUES.get(i));
+//		for(int i = 0; i < lang.VALUES.size(); i++) System.out.println(lang.KEYS.get(i) + " -> " + lang.VALUES.get(i) + ";");
 		Save.language = lang;
 	}
 	public static String get(String key) {

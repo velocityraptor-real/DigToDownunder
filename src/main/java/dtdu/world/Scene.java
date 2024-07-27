@@ -48,12 +48,10 @@ public enum Scene {
 	BAR {
 		GameObject[][] staticMap = new GameObject[12][9];
 		{
-			staticMap[1][1] = staticMap[2][1] = staticMap[2][2] = staticMap[4][1] = staticMap[4][2]
-				= staticMap[5][1] = staticMap[5][2] = staticMap[6][1] = staticMap[6][2] = staticMap[7][1]
-				= staticMap[1][7] = staticMap[2][6] = staticMap[2][7] = staticMap[3][7] = staticMap[4][6]
-				= staticMap[5][6] = staticMap[5][7] = staticMap[6][6] = staticMap[6][7] = staticMap[7][7]
-				= staticMap[9][2] = staticMap[9][6] = staticMap[10][2] = staticMap[10][6] = staticMap[11][2]
-				= staticMap[11][6] = (GameObject) Registry.get("object");
+			staticMap[2][1] = staticMap[2][2] = staticMap[5][1] = staticMap[5][2] = staticMap[6][1] = staticMap[6][2]
+				= staticMap[2][6] = staticMap[2][7] = staticMap[5][6] = staticMap[5][7] = staticMap[6][6] = staticMap[6][7]
+				= staticMap[9][2] = staticMap[9][6] = staticMap[10][2] = staticMap[10][6] = staticMap[11][2] = staticMap[11][6]
+				= (GameObject) Registry.get("object");
 			staticMap[11][8] = (GameObject) Registry.get("trash_can");
 			additionalDataLength = 1;
 		}
@@ -75,7 +73,16 @@ public enum Scene {
 		public ArrayList<Individual> getDynamicMap() {
 			ArrayList<Individual> map = new ArrayList<>();
 			map.add(((IndividualCreator) Registry.get("pianist")).create(11F, 0.5F, null));
+			IndividualCreator chairs = ((IndividualCreator) Registry.get("chair"));
+			map.add(chairs.create(1.55F, 1.5F, new byte[] {1}));
+			map.add(chairs.create(4.63F, 1.5F, new byte[] {1}));
+			map.add(chairs.create(7.45F, 1.5F, new byte[] {0}));
+			map.add(chairs.create(4.5F, 2.5F, new byte[] {1}));
 			map.add(((IndividualCreator) Registry.get("player")).create(4F, 4F, null));
+			map.add(chairs.create(4.5F, 6.5F, new byte[] {1}));
+			map.add(chairs.create(7.45F, 7.47F, new byte[] {0}));
+			map.add(chairs.create(1.55F, 7.5F, new byte[] {1}));
+			map.add(chairs.create(3.48F, 7.5F, new byte[] {0}));
 			return map;
 		}
 		@Override

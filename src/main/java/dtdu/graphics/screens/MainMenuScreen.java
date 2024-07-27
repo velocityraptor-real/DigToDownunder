@@ -118,34 +118,32 @@ public class MainMenuScreen extends GameScreen {
 		}
 	}
 	public void toggleName(boolean flag) {
-		if(flag) {
-			name = new JTextField(Language.get("MyGame")) {
-				private static final long serialVersionUID = 2561891906833502732L;
-				int width = 0, height = 0;
-				{
-					addKeyListener(new KeyListener(){
-						@Override public void keyTyped(KeyEvent e) {}
-						@Override public void keyReleased(KeyEvent e) {}
-						@Override public void keyPressed(KeyEvent e) {
-							if(e.getKeyCode() == KeyEvent.VK_ENTER) confirm.press();
-						}
-					});
-				}
-				@Override
-				protected void paintComponent(Graphics g) {
-					if(getWidth() != width || getHeight() != height) {
-						width = getWidth();
-						height = getHeight();
-						updateFont(width, height);
-					} super.paintComponent(g);
-				}
-				protected void updateFont(int width, int height) {
-					height = height * 3 / 4;
-					width = width * 7 / 50;
-					setFont(new Font(Font.MONOSPACED, Font.BOLD, width < height ? width : height));
-				}
-			}; add(name);
-		} else if(name != null) {
+		if(flag) add(name = new JTextField(Language.get("MyGame")) {
+			private static final long serialVersionUID = 2561891906833502732L;
+			int width = 0, height = 0;
+			{
+				addKeyListener(new KeyListener(){
+					@Override public void keyTyped(KeyEvent e) {}
+					@Override public void keyReleased(KeyEvent e) {}
+					@Override public void keyPressed(KeyEvent e) {
+						if(e.getKeyCode() == KeyEvent.VK_ENTER) confirm.press();
+					}
+				});
+			}
+			@Override
+			protected void paintComponent(Graphics g) {
+				if(getWidth() != width || getHeight() != height) {
+					width = getWidth();
+					height = getHeight();
+					updateFont(width, height);
+				} super.paintComponent(g);
+			}
+			protected void updateFont(int width, int height) {
+				height = height * 3 / 4;
+				width = width * 7 / 50;
+				setFont(new Font(Font.MONOSPACED, Font.BOLD, width < height ? width : height));
+			}
+		}); else if(name != null) {
 			remove(name);
 			name = null;
 		}

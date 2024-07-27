@@ -16,7 +16,7 @@ public class Save {
 	public static volatile Map map;
 	public static volatile Language language;
 	public static void newSave(File f) {
-		f.mkdir();
+		f.mkdirs();
 		Save.save = f;
 		Textures.loadCharacterTextures();
 		Scene.transitTo(Scene.BAR);
@@ -32,6 +32,7 @@ public class Save {
 				Screens.inventoryScreen.loadInventory(reader);
 			}
 		} catch(EndOfStreamException en) {} catch(IOException e) {Main.printError(e);}
+		Textures.loadCharacterTextures();
 		Scene.transitTo(Scene.values()[i]);
 	}
 	public static void save() {
