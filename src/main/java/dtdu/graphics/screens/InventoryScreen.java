@@ -129,23 +129,23 @@ public class InventoryScreen extends GameScreen {
 			removeAll();
 			Item it = selected == -1 ? null : items[selected];
 			if(selected == -1 || it == null) {
-				g.drawString("Game Paused", 51 * horizontalScale, 23 * verticalScale);
-				g.drawString("HP: " + String.format("%.1f", Save.player.getHealth()), 88 * horizontalScale, 8 * verticalScale);
-				g.drawString("AP: " + String.format("%.1f", Save.player.getArmor()), 88 * horizontalScale, 13 * verticalScale);
+				Screens.drawCenteredText(Language.get("gamepaused"), g, (int) (65 * horizontalScale), (int) (23 * verticalScale));
+				g.drawString(Language.get("HP") + ": " + String.format("%.1f", Save.player.getHealth()), 88 * horizontalScale, 8 * verticalScale);
+				g.drawString(Language.get("AP") + ": " + String.format("%.1f", Save.player.getArmor()), 88 * horizontalScale, 13 * verticalScale);
 			} else {
 				i = it.getImage();
 				if(i != null) g.drawImage(i, (int) (48 * horizontalScale), (int)(6 * verticalScale), (int) (i.getWidth() * horizontalScale), (int) (i.getHeight() * verticalScale), null);
 				int x = (int) (88 * horizontalScale), y = (int) (3.5F * horizontalScale), width = (int) (36 * horizontalScale), height = (int) (5 * horizontalScale);
-				GButton ib = new GButton("Drop", () -> {it.drop(); selected = -1; InventoryScreen.this.draw(true);});
+				GButton ib = new GButton(Language.get("Drop"), () -> {it.drop(); selected = -1; InventoryScreen.this.draw(true);});
 				add(ib);
 				ib.setBounds(x, y, width, height);
 				y += height;
 				if(selected < 4) {
-					add(ib = new GButton("Unequip", () -> {it.unequip(); selected = -1; InventoryScreen.this.draw(true);}));
+					add(ib = new GButton(Language.get("Unequip"), () -> {it.unequip(); selected = -1; InventoryScreen.this.draw(true);}));
 					ib.setBounds(x, y, width, height);
 					y += height;
 				} else if(it.getEquipmentSlot() != -1) {
-					add(ib = new GButton("Equip", () -> {it.equip(); selected = -1; InventoryScreen.this.draw(true);}));
+					add(ib = new GButton(Language.get("Equip"), () -> {it.equip(); selected = -1; InventoryScreen.this.draw(true);}));
 					ib.setBounds(x, y, width, height);
 					y += height;
 				} for(GButton ibu : it.getButtons()) {
@@ -153,9 +153,9 @@ public class InventoryScreen extends GameScreen {
 					ibu.setBounds(x, y, width, height);
 					y += height;
 				} y += height;
-				g.drawString("Type: " + it.getRegistryName(), x, y);
+				g.drawString(Language.get("Type") + ": " + Language.get(it.getRegistryName()), x, y);
 				y += height;
-				g.drawString("Amount: " + it.getAmount(), x, y);
+				g.drawString(Language.get("Amount") + ": " + it.getAmount(), x, y);
 			} g.dispose();
 		} super.draw(render);
 	}
@@ -174,19 +174,14 @@ public class InventoryScreen extends GameScreen {
 					String s = String.valueOf(i.getAmount());
 					g.drawImage(Textures.font(s.charAt(0)), x - 1, y + 3, null);
 					g.drawImage(Textures.font(s.charAt(1)), x + 5, y + 3, null);
-				} else g.drawImage(Textures.font(String.valueOf(i.getAmount()).charAt(0)), x + 5, y + 3, null);
+				} else if(i.getAmount() > 1) g.drawImage(Textures.font(String.valueOf(i.getAmount()).charAt(0)), x + 5, y + 3, null);
 				return true;
 			}
 		} return false;
 	}
-	protected void updateFont(int width, int height) {
-		height = height * 3 / 40;
-		width = width >> 5;
-		font = new Font(Font.MONOSPACED, Font.BOLD, width < height ? width : height);
-	}
 	@Override
 	protected void updateDimensions(int width, int height) {
-		updateFont(width, height);
+		font = Textures.getFont(width, height);
 		super.updateDimensions(width, height);
 	}
 	public Item take(Item i) {

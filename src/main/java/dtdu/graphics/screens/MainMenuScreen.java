@@ -1,29 +1,27 @@
 package main.java.dtdu.graphics.screens;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
 import javax.swing.JTextField;
 
 import main.java.dtdu.Main;
-import main.java.dtdu.graphics.Screens;
-import main.java.dtdu.graphics.Textures;
-import main.java.dtdu.graphics.gui.GButton;
-import main.java.dtdu.util.Utils;
+import main.java.dtdu.graphics.*;
+import main.java.dtdu.graphics.gui.*;
 import main.java.dtdu.world.*;
 
 public class MainMenuScreen extends GameScreen {
 	private static final long serialVersionUID = -4593272722863309251L;
-	private GButton loadGame, exit, newSave, back, confirm;
+	private GButton loadGame, exit, newSave, back, confirm, selectLanguage;
 	private JTextField name;
-	private GButton[] saves, delete;
+	private GButton[] saves, delete, languages;
 	private File[] savesList;
 	public MainMenuScreen() {
 		toggleLoadGame(true);
 		toggleExit(true);
+		toggleSelectLanguage(true);
 	}
 	public void keyEnterPressed() {
 		if(loadGame != null) loadGame.press();
@@ -36,66 +34,92 @@ public class MainMenuScreen extends GameScreen {
 		else if(back != null) back.press();
 	}
 	public void toggleExit(boolean flag) {
-		if(flag) add(exit = new GButton("Exit", () -> Main.shutdown()));
+		if(flag) add(exit = new GButton(Language.get("Exit"), () -> Main.shutdown()));
 		else if(exit != null) {
 			remove(exit);
 			exit = null;
 		} updateDimensions(getWidth(), getHeight());
 	}
+	public void toggleSelectLanguage(boolean flag) {
+		if(flag) add(selectLanguage = new GButton(Language.get("SelectLanguage"), () -> {
+			toggleExit(false);
+			toggleLoadGame(false);
+			toggleSelectLanguage(false);
+			toggleBack(true);
+			toggleLanguages(true);
+			updateDimensions(getWidth(), getHeight());
+			Screens.render();
+		})); else if(selectLanguage != null) {
+			remove(selectLanguage);
+			selectLanguage = null;
+		}
+	}
+	public void toggleLanguages(boolean flag) {
+		if(flag) {
+			languages = new GButton[] {
+				(GButton) add(new LanguageButton(Language.get("Croatian"), 'h')),
+				(GButton) add(new LanguageButton(Language.get("English"), '#')),
+				(GButton) add(new LanguageButton(Language.get("German"), 'd')),
+				(GButton) add(new LanguageButton(Language.get("Russian"), 'r')),
+				(GButton) add(new LanguageButton(Language.get("Spanish"), 'e'))
+		};} else if(languages != null) {
+			for(GButton b : languages) remove(b);
+			languages = null;
+		}
+	}
 	public void toggleLoadGame(boolean flag) {
-		if(flag) add(loadGame = new GButton("Load Game", () -> {
-				toggleSaves(true);
-				toggleExit(false);
-				toggleLoadGame(false);
-				Screens.render();
-			}));
-		else if(loadGame != null) {
+		if(flag) add(loadGame = new GButton(Language.get("LoadGame"), () -> {
+			toggleSaves(true);
+			toggleExit(false);
+			toggleSelectLanguage(false);
+			toggleLoadGame(false);
+			Screens.render();
+		})); else if(loadGame != null) {
 			remove(loadGame);
 			loadGame = null;
 		}
 	}
 	public void toggleBack(boolean flag) {
-		if(flag) add(back = new GButton("Go Back", () -> {
-				toggleSaves(false);
-				toggleName(false);
-				toggleConfirm(false);
-				toggleBack(false);
-				toggleLoadGame(true);
-				toggleExit(true);
-				Screens.render();
-			}));
-		else if(back != null) {
+		if(flag) add(back = new GButton(Language.get("GoBack"), () -> {
+			toggleSaves(false);
+			toggleName(false);
+			toggleConfirm(false);
+			toggleBack(false);
+			toggleLanguages(false);
+			toggleLoadGame(true);
+			toggleSelectLanguage(true);
+			toggleExit(true);
+			Screens.render();
+		})); else if(back != null) {
 			remove(back);
 			back = null;
 		}
 	}
 	public void toggleConfirm(boolean flag) {
-		if(flag) add(confirm = new GButton("Start Game", () -> {
-				String text = name.getText();
-				if(!(text.isEmpty() || text.isBlank() || text.contains("/") || text.contains("\\") || text.contains(".") || text.contains("|") || text.contains(";") || text.contains(":")) && notOccupied(savesList, text))
-					Save.newSave(new File("./saves/" + text));
-		}));
-		else if(confirm != null) {
+		if(flag) add(confirm = new GButton(Language.get("StartGame"), () -> {
+			String text = name.getText();
+			if(!(text.isEmpty() || text.isBlank() || text.contains("/") || text.contains("\\") || text.contains(".") || text.contains("|") || text.contains(";") || text.contains(":")) && notOccupied(savesList, text))
+				Save.newSave(new File("./saves/" + text));
+		})); else if(confirm != null) {
 			remove(confirm);
 			confirm = null;
 		}
 	}
 	private void toggleNewSave(boolean flag) {
-		if(flag) add(newSave = new GButton("New Game", () -> {
-				toggleName(true);
-				toggleConfirm(true);
-				toggleSaves(false);
-				updateDimensions(MainMenuScreen.this.getWidth(), MainMenuScreen.this.getHeight());
-				Screens.render();
-			}));
-		else if(newSave != null) {
+		if(flag) add(newSave = new GButton(Language.get("NewGame"), () -> {
+			toggleName(true);
+			toggleConfirm(true);
+			toggleSaves(false);
+			updateDimensions(MainMenuScreen.this.getWidth(), MainMenuScreen.this.getHeight());
+			Screens.render();
+		})); else if(newSave != null) {
 			remove(newSave);
 			newSave = null;
 		}
 	}
 	public void toggleName(boolean flag) {
 		if(flag) {
-			name = new JTextField("My Game") {
+			name = new JTextField(Language.get("MyGame")) {
 				private static final long serialVersionUID = 2561891906833502732L;
 				int width = 0, height = 0;
 				{
@@ -120,8 +144,7 @@ public class MainMenuScreen extends GameScreen {
 					width = width * 7 / 50;
 					setFont(new Font(Font.MONOSPACED, Font.BOLD, width < height ? width : height));
 				}
-			};
-			add(name);
+			}; add(name);
 		} else if(name != null) {
 			remove(name);
 			name = null;
@@ -142,8 +165,8 @@ public class MainMenuScreen extends GameScreen {
 						toggleSaves(false);
 						toggleBack(false);
 					}));
-					add(delete[i] = new GButton("Delete", () -> {
-						Utils.delete(f);
+					add(delete[i] = new GButton(Language.get("Delete"), () -> {
+						Main.delete(f);
 						toggleBack(false);
 						toggleSaves(false);
 						toggleSaves(true);
@@ -175,12 +198,20 @@ public class MainMenuScreen extends GameScreen {
 			graphics.dispose();
 		} super.draw(render);
 	}
+	public void updateDimensions() {
+		updateDimensions(getWidth(), getHeight());
+	}
 	@Override
 	protected void updateDimensions(int width, int height) {
 		int x = width / 3, y = height / 3, buttonwidth = width / 3, buttonheight = height / 10, spacing = buttonheight * 4 / 3;
-		if(loadGame != null) loadGame.setBounds(x, y, buttonwidth, buttonheight);
-		if(exit != null) exit.setBounds(x, y + spacing, buttonwidth, buttonheight);
-		if(saves == null) {
+		if(loadGame != null) {
+			loadGame.setBounds(x, y, buttonwidth, buttonheight);
+			y += spacing;
+		} if(selectLanguage != null) {
+			selectLanguage.setBounds(x, y, buttonwidth, buttonheight);
+			y += spacing;
+		} if(exit != null) exit.setBounds(x, y, buttonwidth, buttonheight);
+		if(saves == null && languages == null) {
 			if(back != null) {
 				back.setBounds(x, y, buttonwidth, buttonheight);
 				y += spacing;
@@ -192,15 +223,19 @@ public class MainMenuScreen extends GameScreen {
 				y += spacing;
 			} if(confirm != null) confirm.setBounds(x, y, buttonwidth, buttonheight);
 		} else {
-			y = height / (saves.length + (saves.length < 5 ? 3 : 2));
+			if(saves != null) y = height / (saves.length + (saves.length < 5 ? 3 : 2));
+			else if(languages != null)  y = height / (languages.length + (languages.length < 5 ? 3 : 2));
 			if(back != null) back.setBounds(x, y, buttonwidth, buttonheight);
 			y += spacing;
 			if(newSave != null) {
 				newSave.setBounds(x, y, buttonwidth, buttonheight);
 				y += spacing;
-			} for(int i = 0; i < saves.length; i++) {
+			} if(saves != null) for(int i = 0; i < saves.length; i++) {
 				saves[i].setBounds(x, y, buttonwidth, buttonheight);
 				delete[i].setBounds(x + (int) (buttonwidth * 1.05F), y, (buttonwidth << 2) / 5, buttonheight);
+				y += spacing;
+			} if(languages != null) for(int i = 0; i < languages.length; i++) {
+				languages[i].setBounds(x, y, buttonwidth, buttonheight);
 				y += spacing;
 			}
 		} super.updateDimensions(width, height);

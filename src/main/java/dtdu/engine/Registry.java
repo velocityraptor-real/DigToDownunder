@@ -3,6 +3,7 @@ package main.java.dtdu.engine;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import main.java.dtdu.graphics.Language;
 import main.java.dtdu.graphics.Textures;
 import main.java.dtdu.graphics.gui.Dialogue;
 import main.java.dtdu.item.ItemCreator;
@@ -63,7 +64,7 @@ public interface Registry {
 				if(from instanceof Player && !DataReader.readBoolean(Save.map.additionalData[0])) {
 					DataWriter.write(true, Save.map.additionalData, 0);
 					((ItemCreator) get("coin")).create((byte)3).addToInventory();
-					Dialogue.start(Textures.trashcan, new String[] {"You recieved three coins!"}, new boolean[] {true});
+					Dialogue.start(Textures.trashcan, new String[] {Language.get("threecoins")}, new boolean[] {true});
 				} return Direction.NONE;
 			};
 		});

@@ -3,6 +3,7 @@ package main.java.dtdu.object.bar;
 import java.awt.image.BufferedImage;
 
 import main.java.dtdu.engine.Ticker;
+import main.java.dtdu.graphics.Language;
 import main.java.dtdu.graphics.Textures;
 import main.java.dtdu.graphics.gui.Dialogue;
 import main.java.dtdu.object.Player;
@@ -40,7 +41,7 @@ public class Pianist extends TickingIndividual {
 	}
 	@Override
 	public Direction interacted(GameObject from, Direction direction) {
-		if(from instanceof Player) Dialogue.start(Textures.pianist[0], new String[] {"Hello!"}, new boolean[] {true});
+		if(from instanceof Player) Dialogue.start(Textures.pianist[0], new String[] {Language.get("Hello!")}, new boolean[] {true});
 		return Direction.NONE;
 	}
 }

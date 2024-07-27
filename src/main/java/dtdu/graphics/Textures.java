@@ -1,6 +1,7 @@
 package main.java.dtdu.graphics;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.*;
 
@@ -31,23 +32,7 @@ public class Textures {
 			//Font
 			font = load(new String[] {
 					"gui/pixelfont/0", "gui/pixelfont/1", "gui/pixelfont/2", "gui/pixelfont/3", "gui/pixelfont/4", "gui/pixelfont/5",
-					"gui/pixelfont/6", "gui/pixelfont/7", "gui/pixelfont/8", "gui/pixelfont/9", "gui/pixelfont/eden_portal", "gui/pixelfont/.",
-					"gui/pixelfont/doppelpunkt", "gui/pixelfont/fragezeichen", "gui/pixelfont/!", "gui/pixelfont/lowercase/a", "gui/pixelfont/lowercase/ä",
-					"gui/pixelfont/lowercase/b", "gui/pixelfont/lowercase/c", "gui/pixelfont/lowercase/d", "gui/pixelfont/lowercase/e",
-					"gui/pixelfont/lowercase/f", "gui/pixelfont/lowercase/g", "gui/pixelfont/lowercase/h", "gui/pixelfont/lowercase/i",
-					"gui/pixelfont/lowercase/j", "gui/pixelfont/lowercase/k", "gui/pixelfont/lowercase/l", "gui/pixelfont/lowercase/m",
-					"gui/pixelfont/lowercase/n", "gui/pixelfont/lowercase/o", "gui/pixelfont/lowercase/ö", "gui/pixelfont/lowercase/p",
-					"gui/pixelfont/lowercase/q", "gui/pixelfont/lowercase/r", "gui/pixelfont/lowercase/s", "gui/pixelfont/lowercase/ß",
-					"gui/pixelfont/lowercase/t", "gui/pixelfont/lowercase/u", "gui/pixelfont/lowercase/ü", "gui/pixelfont/lowercase/v",
-					"gui/pixelfont/lowercase/w", "gui/pixelfont/lowercase/x", "gui/pixelfont/lowercase/y", "gui/pixelfont/lowercase/z",
-					"gui/pixelfont/uppercase/a", "gui/pixelfont/uppercase/ä", "gui/pixelfont/uppercase/b", "gui/pixelfont/uppercase/c",
-					"gui/pixelfont/uppercase/d", "gui/pixelfont/uppercase/e", "gui/pixelfont/uppercase/f", "gui/pixelfont/uppercase/g",
-					"gui/pixelfont/uppercase/h", "gui/pixelfont/uppercase/i", "gui/pixelfont/uppercase/j", "gui/pixelfont/uppercase/k",
-					"gui/pixelfont/uppercase/l", "gui/pixelfont/uppercase/m", "gui/pixelfont/uppercase/n", "gui/pixelfont/uppercase/o",
-					"gui/pixelfont/uppercase/ö", "gui/pixelfont/uppercase/p", "gui/pixelfont/uppercase/q", "gui/pixelfont/uppercase/r",
-					"gui/pixelfont/uppercase/s", "gui/pixelfont/uppercase/t", "gui/pixelfont/uppercase/u", "gui/pixelfont/uppercase/ü",
-					"gui/pixelfont/uppercase/v", "gui/pixelfont/uppercase/w", "gui/pixelfont/uppercase/x", "gui/pixelfont/uppercase/y",
-					"gui/pixelfont/uppercase/z"
+					"gui/pixelfont/6", "gui/pixelfont/7", "gui/pixelfont/8", "gui/pixelfont/9", "gui/pixelfont/eden_portal", "gui/pixelfont/."
 			});
 			//Persons
 			pianist = load(new String[] {
@@ -91,15 +76,12 @@ public class Textures {
 	public static BufferedImage font(char c) {
 		return font[switch(c) {
 		case '0' -> 0; case '1' -> 1; case '2' -> 2; case '3' -> 3; case '4' -> 4; case '5' -> 5; case '6' -> 6; case '7' -> 7; case '8' -> 8;
-		case '9' -> 9; case '.' -> 11; case ':' -> 12; case '?' -> 13; case '!' -> 14; case 'a' -> 15; case 'ä' -> 16; case 'b' -> 17; case 'c' -> 18;
-		case 'd' -> 19; case 'e' -> 20; case 'f' -> 21; case 'g' -> 22; case 'h' -> 23; case 'i' -> 24; case 'j' -> 25; case 'k' -> 26; case 'l' -> 27;
-		case 'm' -> 28; case 'n' -> 29; case 'o' -> 30; case 'ö' -> 31; case 'p' -> 32; case 'q' -> 33; case 'r' -> 34; case 's' -> 35; case 'ß' -> 36;
-		case 't' -> 37; case 'u' -> 38; case 'ü' -> 39; case 'v' -> 40; case 'w' -> 41; case 'x' -> 42; case 'y' -> 43; case 'z' -> 44; case 'A' -> 45;
-		case 'Ä' -> 46; case 'B' -> 47; case 'C' -> 48; case 'D' -> 49; case 'E' -> 50; case 'F' -> 51; case 'G' -> 52; case 'H' -> 53; case 'I' -> 54;
-		case 'J' -> 55; case 'K' -> 56; case 'L' -> 57; case 'M' -> 58; case 'N' -> 59; case 'O' -> 60; case 'Ö' -> 61; case 'P' -> 62; case 'Q' -> 63;
-		case 'R' -> 64; case 'S' -> 65; case 'T' -> 66; case 'U' -> 67; case 'Ü' -> 68; case 'V' -> 69; case 'W' -> 70; case 'X' -> 71; case 'Y' -> 72;
-		case 'Z' -> 73;
-		default -> 10;
+		case '9' -> 9; case '.' -> 11; default -> 10;
 		}];
+	}
+	public static Font getFont(int width, int height) {
+		height = height * 3 / 40;
+		width = width >> 5;
+		return new Font(Font.MONOSPACED, Font.BOLD, width < height ? width : height);
 	}
 }

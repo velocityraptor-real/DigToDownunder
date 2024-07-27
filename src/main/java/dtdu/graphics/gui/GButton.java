@@ -71,7 +71,7 @@ public class GButton extends JComponent implements Drawable {
 			graphics.drawImage(active ? Textures.button_active : hover ? Textures.button_hover : Textures.button_idle, 0, 0, width, height, this);
 			graphics.setFont(font);
 			graphics.setColor(getForeground());
-			graphics.drawString(text, getWidth() / (1 + (text.length() < 9 ? (text.length() * 3) >> 2 : text.length())), (getHeight() * 11) >> 4);
+			Screens.drawCenteredText(text, graphics, getWidth() >> 1, (getHeight() * 11) >> 4);
 			graphics.dispose();
 			Drawable.super.draw(render);
 		}

@@ -27,7 +27,7 @@ public class PauseScreen extends GameScreen {
 		if(mainMenu != null) mainMenu.press();
 	}
 	private void toggleMainMenu(boolean flag) {
-		if(flag) add(mainMenu = new GButton("Exit to Menu", () -> {
+		if(flag) add(mainMenu = new GButton(Language.get("ExittoMenu"), () -> {
 			Save.save();
 			Save.scene.sceneTranstionTo(Scene.MAIN_MENU);
 			Scene.MAIN_MENU.sceneTransitionFrom(Save.scene);
@@ -40,7 +40,7 @@ public class PauseScreen extends GameScreen {
 		}
 	}
 	private void toggleContinue(boolean flag) {
-		if(flag) add(contin = new GButton("Back to Game", () -> {
+		if(flag) add(contin = new GButton(Language.get("BacktoGame"), () -> {
 			PauseScreen.this.setVisible(false);
 			Ticker.gamePaused = false;
 		}));
@@ -60,7 +60,7 @@ public class PauseScreen extends GameScreen {
 			if(mainMenu != null) {
 				gr.setColor(Color.WHITE);
 				gr.setFont(font);
-				gr.drawString("Game Paused", getWidth() * 13 / 36, getHeight() / 5);
+				Screens.drawCenteredText(Language.get("gamepaused"), gr, getWidth() >> 1, getHeight() / 5);
 			}
 		} super.draw(render);
 	}
@@ -80,12 +80,7 @@ public class PauseScreen extends GameScreen {
 		int x = width / 3, y = height / 3, buttonwidth = width / 3, buttonheight = height / 10, spacing = buttonheight * 4 / 3;
 		if(mainMenu != null) mainMenu.setBounds(x, y, buttonwidth, buttonheight);
 		if(contin != null) contin.setBounds(x, y + spacing, buttonwidth, buttonheight);
-		updateFont(width, height);
+		font = Textures.getFont(width, height);
 		super.updateDimensions(width, height);
-	}
-	protected void updateFont(int width, int height) {
-		height = height * 3 / 40;
-		width = (width << 2) / 99;
-		font = new Font(Font.MONOSPACED, Font.BOLD, width < height ? width : height);
 	}
 }

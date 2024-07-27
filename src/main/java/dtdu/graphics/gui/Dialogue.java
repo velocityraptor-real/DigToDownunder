@@ -50,8 +50,7 @@ public class Dialogue implements Tickable {
 			}
 		} Ticker.shouldRedrawWorld = true;
 	}
-	@Override
-	public void tick() {
+	@Override public void tick() {
 		if(dialogue != null && i < dialogue.length) {
 			String s = dialogue[i];
 			if(j < s.length()) {

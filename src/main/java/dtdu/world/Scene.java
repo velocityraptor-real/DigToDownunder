@@ -32,6 +32,7 @@ public enum Scene {
 			mainMenuScreen.toggleBack(false);
 			mainMenuScreen.toggleConfirm(false);
 			mainMenuScreen.toggleLoadGame(true);
+			mainMenuScreen.toggleSelectLanguage(true);
 			mainMenuScreen.toggleExit(true);
 			super.sceneTransitionFrom(from);
 			Save.save = null;

@@ -1,0 +1,26 @@
+threecoins Dobiš tri novčića!
+gamepaused Igra pauzirana
+HP Život
+AP Oklop
+Drop Pusti past
+Unequip Skloni
+Equip Opremi
+Type Tip
+Amount Količina
+Exit Isključi
+LoadGame Izaberi Igru
+GoBack Natrag
+StartGame Počni Igru
+NewGame Nova Igra
+MyGame Moja Igra
+Delete Izbriši
+ExittoMenu Vrati se do Menija
+BacktoGame Nastavi Igru
+Hello! Bok!
+SelectLanguage Jezik
+Croatian Hrvatski
+English Engleski
+German Njemački
+Russian Ruski
+coin Novčić
+Spanish Španjolski

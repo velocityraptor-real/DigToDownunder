@@ -1,0 +1,26 @@
+threecoins Ты получили три монеты
+gamepaused Игра на паузи
+HP Жизнь
+AP Броня
+Drop Отпустит
+Unequip Склонный
+Equip Оборудуй
+Type Тип
+Amount Количество
+Exit Исключи
+LoadGame Выбери игру
+GoBack Назад
+StartGame Начаты игру
+NewGame Новая игра
+MyGame Моя игра
+Delete Удали
+ExittoMenu Назад в меню
+BacktoGame Продолжи игру
+Hello! Привет!
+SelectLanguage Язык
+Croatian Хорватский
+English Английский
+German Немецкий
+Russian Русский
+coin Монета
+Spanish Испанский

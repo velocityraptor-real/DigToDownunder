@@ -3,6 +3,7 @@ package main.java.dtdu.world;
 import java.io.*;
 
 import main.java.dtdu.Main;
+import main.java.dtdu.graphics.Language;
 import main.java.dtdu.graphics.Screens;
 import main.java.dtdu.graphics.Textures;
 import main.java.dtdu.object.Player;
@@ -13,6 +14,7 @@ public class Save {
 	public static volatile Scene scene = Scene.MAIN_MENU;
 	public static volatile Player player;
 	public static volatile Map map;
+	public static volatile Language language;
 	public static void newSave(File f) {
 		f.mkdir();
 		Save.save = f;

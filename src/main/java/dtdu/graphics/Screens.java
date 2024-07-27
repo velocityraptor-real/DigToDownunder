@@ -12,7 +12,7 @@ import main.java.dtdu.world.*;
 
 public class Screens {
 	public static volatile boolean shift = false;
-	public static final JFrame frame = new JFrame("Dig To DownUnder") {
+	public static final JFrame frame = new JFrame("Dig To Downunder") {
 		private static final long serialVersionUID = -5813497523539285446L;
 		static boolean w = false, kp_up = false, up = false, s = false, kp_down = false, down = false, a = false, kp_left = false, left = false, d = false, kp_right = false, right = false;
 		{
@@ -175,5 +175,34 @@ public class Screens {
 	}
 	public static synchronized void render() {
 		if(screen.isVisible()) screen.paint(screen.getGraphics());
+	}
+	public static void drawText(String text, Graphics2D graphics, int x, int y, int rowSize) {
+		final int i = text.length() / rowSize + (text.length() % rowSize == 0 ? 0 : 1), h = graphics.getFontMetrics().getHeight();
+		for(int k = 0, j = 0; k < i; k++) {
+			if(k == i - 1) graphics.drawString(text.substring(j), x, y);
+			else {
+				graphics.drawString(text.substring(j, j + rowSize), x, y);
+				y += h;
+				j += rowSize;
+			}
+		}
+	}
+	public static void drawCenteredText(String text, Graphics2D graphics, int centerX, int y) {
+		graphics.drawString(text, centerX - (graphics.getFontMetrics().stringWidth(text) >> 1), y);
+	}
+	public static void drawCenteredText(String text, Graphics2D graphics, int centerX, int y, int rowSize) {
+		final int i = text.length() / rowSize + (text.length() % rowSize == 0 ? 0 : 1), h = graphics.getFontMetrics().getHeight();
+		String s;
+		for(int k = 0, j = 0; k < i; k++) {
+			if(k == i - 1) {
+				s = text.substring(j);
+				graphics.drawString(s, centerX - (graphics.getFontMetrics().stringWidth(s) >> 1), y);
+			} else {
+				s = text.substring(j, j + rowSize);
+				graphics.drawString(s, centerX - (graphics.getFontMetrics().stringWidth(s) >> 1), y);
+				y += h;
+				j += rowSize;
+			}
+		}
 	}
 }

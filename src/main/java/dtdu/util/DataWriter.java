@@ -6,12 +6,13 @@ public class DataWriter extends FileOutputStream {
 	private DataWriter(File file) throws FileNotFoundException {
 		super(file);
 	}
-	public static DataWriter create(String path) throws FileNotFoundException {
+	public static DataWriter create(String path) throws IOException {
 		return create(new File(path));
 	}
-	public static DataWriter create(File f) throws FileNotFoundException {
+	public static DataWriter create(File f) throws IOException {
 		if(f.exists()) f.delete();
 		else if(!f.getParentFile().exists()) f.getParentFile().mkdirs();
+		f.createNewFile();
 		return new DataWriter(f);
 	}
 	public static byte[] writeBooleans(boolean[] b) {

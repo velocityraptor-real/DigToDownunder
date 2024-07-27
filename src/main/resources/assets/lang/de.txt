@@ -1,1 +1,26 @@
-Bar
+threecoins Du hast drei Münzen bekommen!
+gamepaused Spiel pausiert
+HP LP
+AP RP
+Drop Fallen lassen
+Unequip Abrüsten
+Equip Ausrüsten
+Type Typ
+Amount Anzahl
+Exit Ausschalten
+LoadGame Spiel laden
+GoBack Zurück
+StartGame Spiel starten
+NewGame Neues Spiel
+MyGame Mein Spiel
+Delete Löschen
+ExittoMenu Zurück zum Menü
+BacktoGame Spiel fortsetzen
+Hello! Hallo!
+SelectLanguage Sprache
+Croatian Kroatisch
+English Englisch
+German Deutsch
+Russian Russisch
+coin Münze
+Spanish Spanisch

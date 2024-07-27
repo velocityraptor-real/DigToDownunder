@@ -1,0 +1,26 @@
+threecoins You recieved three coins!
+gamepaused Game Paused
+HP HP
+AP AP
+Drop Drop
+Unequip Unequip
+Equip Equip
+Type Type
+Amount Amount
+Exit Exit
+LoadGame Load Game
+GoBack Go Back
+StartGame Start Game
+NewGame New Game
+MyGame My Game
+Delete Delete
+ExittoMenu Exit to Menu
+BacktoGame Back to Game
+Hello! Hello!
+SelectLanguage Language
+Croatian Croatian
+English English
+German German
+Russian Russian
+coin Coin
+Spanish Spanish

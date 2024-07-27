@@ -1,0 +1,26 @@
+threecoins Recibiste tres monedas!
+gamepaused Juego en pausa
+HP Vida
+AP Armadura
+Drop Déjalo
+Unequip Desequípalo
+Equip Equípalo
+Type Tipo
+Amount Cantidad
+Exit Apagar
+LoadGame Carga juego
+GoBack Atrás
+StartGame Inicie juego
+NewGame Nuevo juego
+MyGame Mi juego
+Delete Elimine
+ExittoMenu Salga al menú
+BacktoGame Vuelve al juego
+Hello! Hola!
+SelectLanguage Lengua
+Croatian Croata
+English Inglés
+German Alemán
+Russian Ruso
+coin Moneda
+Spanish Español

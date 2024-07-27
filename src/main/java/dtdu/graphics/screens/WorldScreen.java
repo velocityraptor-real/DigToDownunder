@@ -1,19 +1,19 @@
 package main.java.dtdu.graphics.screens;
 
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-import main.java.dtdu.graphics.Textures;
+import main.java.dtdu.graphics.*;
 import main.java.dtdu.graphics.gui.Dialogue;
 import main.java.dtdu.object.base.*;
-import main.java.dtdu.util.Utils;
 import main.java.dtdu.world.Save;
 
 public class WorldScreen extends GameScreen {
 	private static final long serialVersionUID = -5064589157795472812L;
 	public volatile float zoom = 3F;
 	public volatile String speechText, hearText;
+	Font font;
 	@Override
 	public void draw(boolean render) {
 		if(isVisible() && getWidth() > 0 && getHeight() > 0) {
@@ -50,7 +50,8 @@ public class WorldScreen extends GameScreen {
 					gr.drawRect(0, y, i.getWidth(), i.getHeight() >> 2);
 					im = Dialogue.d.getImage();
 					if(im != null) gr.drawImage(im, 1, y, (i.getWidth() >> 2) - 2, (i.getHeight() >> 2) - 2, null);
-					Utils.drawText(speechText, gr, i.getWidth() >> 2, y - (i.getHeight() >> 5), ((i.getWidth() * 3) >> 2) / 26, i.getHeight() >> 4, 25);
+					gr.setFont(font);
+					Screens.drawText(speechText, gr, i.getWidth() >> 2, y - (i.getHeight() >> 5), 20);
 				} else if(hearText != null && !hearText.isEmpty()) {
 					gr.setColor(Textures.speechbox_blue);
 					gr.fillRect(1, 1, i.getWidth() - 2, (i.getHeight() >> 2) - 2);
@@ -58,7 +59,8 @@ public class WorldScreen extends GameScreen {
 					gr.drawRect(0, 0, i.getWidth(), i.getHeight() >> 2);
 					im = Dialogue.d.getImage();
 					if(im != null) gr.drawImage(im, 1, 1, (i.getWidth() >> 2) - 2, (i.getHeight() >> 2) - 2, null);
-					Utils.drawText(hearText, gr, i.getWidth() >> 2, -(i.getHeight() >> 5), ((i.getWidth() * 3) >> 2) / 26, i.getHeight() >> 4, 25);
+					gr.setFont(font);
+					Screens.drawText(hearText, gr, i.getWidth() >> 2, i.getHeight() >> 4, 20);
 				} if(Save.player == null || Save.scene.isFilledRender()) graphics.drawImage(i, 0, 0, getWidth(), getHeight(), this);
 				else {
 					if(i.getWidth() * zoom < getWidth()) zoom = (float) getWidth() / (float) i.getWidth();
@@ -73,5 +75,10 @@ public class WorldScreen extends GameScreen {
 				} gr.dispose();
 			} graphics.dispose();
 		} super.draw(render);
+	}
+	@Override
+	protected void updateDimensions(int width, int height) {
+		font = Textures.getFont(width, height);
+		super.updateDimensions(width, height);
 	}
 }
