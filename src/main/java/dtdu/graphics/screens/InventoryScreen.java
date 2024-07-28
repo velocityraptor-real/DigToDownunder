@@ -18,6 +18,14 @@ public class InventoryScreen extends GameScreen {
 	GButton equipButton, useButton;
 	Font font;
 	public volatile int hover = -1, selected = -1;
+	/**
+	 * I am aware of the cursedness of this method.
+	 * I wrote it for fun as a parody on hard coded elements in minecraft java 1.20.1.
+	 * PS: This method WORKS, so I am leaving it like that XD
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public int getSlotForPos(int x, int y) {
 		if(y > 49) {//1
 			if(x < 62) {//2
