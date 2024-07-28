@@ -35,11 +35,7 @@ public class Ticker extends Thread {
 						if(j != -1 && j < ticklist.size()) ticklist.remove(j);
 					}
 				} synchronized(sceduledMapRemoval) {
-					sceduledMapRemoval.sort(null);
-					for(int i = sceduledMapRemoval.size() - 1, j; i > -1; i--) {
-						j = Mathe.binarySearch(Save.map.dynamicMap, sceduledMapRemoval.remove(i));
-						if(j != -1) Save.map.dynamicMap.remove(j);
-					}
+					for(int i = sceduledMapRemoval.size() - 1; i > -1; i--) Mathe.binaryRemove(Save.map.dynamicMap, sceduledMapRemoval.remove(i));
 				} if(shouldRedrawWorld) Screens.worldScreen.draw(true);
 				else if(update) Screens.render();
 			}

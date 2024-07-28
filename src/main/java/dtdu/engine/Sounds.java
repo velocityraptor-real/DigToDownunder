@@ -1,7 +1,10 @@
 package main.java.dtdu.engine;
 
-import main.java.dtdu.util.AudioPlayer;
-
 public class Sounds {
-	public static final AudioPlayer mainTheme = new AudioPlayer("music/main_theme.wav");
+	public static volatile float GAME_VOLUME = 1F;
+	public static volatile float MUSIC_VOLUME = 1F;
+	public static final MusicPlayer mainTheme = new MusicPlayer("music/main_theme.wav");
+	public static void updateVolume() {
+		mainTheme.updateVolume();
+	}
 }

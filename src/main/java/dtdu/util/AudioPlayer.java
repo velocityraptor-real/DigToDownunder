@@ -6,6 +6,7 @@ import javax.sound.sampled.*;
 import javax.sound.sampled.FloatControl.Type;
 
 import main.java.dtdu.Main;
+import main.java.dtdu.engine.Sounds;
 
 public class AudioPlayer {
 	File file;
@@ -13,6 +14,7 @@ public class AudioPlayer {
 	AudioInputStream inputStream;
 	
 	boolean playing = false;
+	float volume = 1F;
 	long frame = 0L;
 	public AudioPlayer(String path) {
 		try {
@@ -23,9 +25,17 @@ public class AudioPlayer {
 		} catch(Exception e) {Main.printError(e);}
 	}
 	public float getVolume() {
-		return (float) Math.pow(10D, ((FloatControl) clip.getControl(Type.MASTER_GAIN)).getValue() / 20F);
+		return volume;
+	}
+	public void updateVolume() {
+		volume(volume);
 	}
 	public void setVolume(float volume) {
+		this.volume = volume;
+		volume(volume);
+	}
+	protected void volume(float volume) {
+		volume *= Sounds.GAME_VOLUME;
 		if(volume < 0f || volume > 1f) throw new IllegalArgumentException("Volume not valid: " + volume);
 		((FloatControl) clip.getControl(Type.MASTER_GAIN)).setValue(20F * (float) Math.log10(volume));
 	}

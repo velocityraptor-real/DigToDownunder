@@ -9,10 +9,11 @@ public class Mathe {
 			if(array.get(i) == value) array.remove(i);
 			else {
 				T v; int j = i;
-				while((v = array.get(--i)).compareTo(value) == 0) if(v == value) {
+				while(j > 0 && (v = array.get(--i)).compareTo(value) == 0) if(v == value) {
 					array.remove(i);
 					return;
-				} while((v = array.get(++j)).compareTo(value) == 0) if(v == value) {
+				} i = array.size() - 1;
+				while(j < i && (v = array.get(++j)).compareTo(value) == 0) if(v == value) {
 					array.remove(j);
 					return;
 				} System.err.println(value + " not in Array!");
@@ -45,8 +46,7 @@ public class Mathe {
 				} int min = 0, max = array.size() - 1, mid, c;
 				while(true) {
 					if(value.compareTo(array.get(max)) > -1) {
-						if(max == array.size() - 1) array.add(value);
-						else array.add(max + 1, value);
+						array.add(max + 1, value);
 						return max + 1;
 					} if(value.compareTo(array.get(min)) < 1) {
 						array.add(min, value);
