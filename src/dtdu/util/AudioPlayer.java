@@ -23,6 +23,7 @@ public class AudioPlayer {
 			clip.open(inputStream);
 			clip.loop(Clip.LOOP_CONTINUOUSLY);
 		} catch(Exception e) {Main.printError(e);}
+		
 	}
 	public float getVolume() {
 		return volume;
@@ -38,6 +39,8 @@ public class AudioPlayer {
 		volume *= Sounds.GAME_VOLUME;
 		if(volume < 0f || volume > 1f) throw new IllegalArgumentException("Volume not valid: " + volume);
 		((FloatControl) clip.getControl(Type.MASTER_GAIN)).setValue(20F * (float) Math.log10(volume));
+		if(volume == 0F) pause();
+		else resume();
 	}
 	public boolean isPlaying() {
 		return playing;
@@ -93,6 +96,7 @@ public class AudioPlayer {
 			inputStream = AudioSystem.getAudioInputStream(file);
 			clip.open(inputStream);
 			clip.loop(Clip.LOOP_CONTINUOUSLY);
+			playing = false;
 		} catch(Exception e) {Main.printError(e);}
 	}
 }

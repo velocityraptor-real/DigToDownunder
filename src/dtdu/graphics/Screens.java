@@ -58,9 +58,9 @@ public class Screens {
 					switch(code) {
 					case KeyEvent.VK_SHIFT: shift = true; break;
 					case KeyEvent.VK_ESCAPE:
-						if(inventoryScreen.isVisible()) inventoryScreen.toggle();
-						else pauseScreen.toggle();
 						if(mainMenuScreen.isVisible()) mainMenuScreen.keyEscapePressed();
+						else if(inventoryScreen.isVisible()) inventoryScreen.toggle();
+						else pauseScreen.toggle();
 						break;
 					default:
 						if(Dialogue.d == null) switch(code) {
@@ -187,7 +187,7 @@ public class Screens {
 			}
 		}
 	}
-	public static void drawCenteredText(String text, Graphics2D graphics, int centerX, int y) {
+	public static void drawCenteredText(String text, Graphics graphics, int centerX, int y) {
 		graphics.drawString(text, centerX - (graphics.getFontMetrics().stringWidth(text) >> 1), y);
 	}
 	public static void drawCenteredText(String text, Graphics2D graphics, int centerX, int y, int rowSize) {

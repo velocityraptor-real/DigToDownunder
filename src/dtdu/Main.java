@@ -38,6 +38,8 @@ public class Main {
 			data.write(r.width);
 			data.write(r.height);
 			data.write(Save.language.identifier);
+			data.write(Sounds.GAME_VOLUME);
+			data.write(Sounds.MUSIC_VOLUME);
 		} catch (IOException e) {printError(e);}
 		System.exit(0);
 	}
@@ -53,6 +55,8 @@ public class Main {
 			int x = r.readInt(), y = r.readInt(), width = r.readInt(), height = r.readInt();
 			Language.loadLanguage(r.readChar());
 			frame.setBounds(x, y, width, height);
+			Sounds.GAME_VOLUME = r.readFloat();
+			Sounds.MUSIC_VOLUME = r.readFloat();
 		} catch (IOException e) {printError(e);}
 		frame.addWindowListener(new WindowListener() {
 			@Override public void windowClosing(WindowEvent e) {shutdown();}
@@ -69,5 +73,6 @@ public class Main {
 		render();
 		Ticker.ticker.start();
 		Sounds.mainTheme.play();
+		Sounds.updateVolume();
 	}
 }

@@ -16,24 +16,12 @@ import static dtdu.graphics.Screens.*;
 
 public enum Scene {
 	MAIN_MENU {
-		@Override
-		public void sceneTranstionTo(Scene to) {
-			mainMenuScreen.toggleBack(false);
-			mainMenuScreen.toggleConfirm(false);
-			mainMenuScreen.toggleExit(false);
-			mainMenuScreen.toggleLoadGame(false);
-			mainMenuScreen.toggleName(false);
-		}
+		@Override public void sceneTranstionTo(Scene to) {}
 		@Override
 		public void sceneTransitionFrom(Scene from) {
 			Sounds.mainTheme.setVolume(1F);
 			if(from != BAR) Sounds.mainTheme.play();
-			mainMenuScreen.toggleName(false);
-			mainMenuScreen.toggleBack(false);
-			mainMenuScreen.toggleConfirm(false);
-			mainMenuScreen.toggleLoadGame(true);
-			mainMenuScreen.toggleSelectLanguage(true);
-			mainMenuScreen.toggleExit(true);
+			mainMenuScreen.loadMainPanel();
 			super.sceneTransitionFrom(from);
 			Save.save = null;
 		}

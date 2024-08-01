@@ -24,3 +24,7 @@ German Njemački
 Russian Ruski
 coin Novčić
 Spanish Španjolski
+Settings Postavci
+Sound Zvuk
+Master Ukupno
+Music Muzika

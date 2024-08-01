@@ -24,3 +24,7 @@ German Alemán
 Russian Ruso
 coin Moneda
 Spanish Español
+Settings Configuración
+Sound Sonido
+Master Total
+Music Música

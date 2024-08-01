@@ -7,12 +7,7 @@ public class LanguageButton extends GButton {
 	public LanguageButton(String text, char lang) {
 		super(text, () -> {
 			Language.loadLanguage(lang);
-			Screens.mainMenuScreen.toggleBack(false);
-			Screens.mainMenuScreen.toggleLanguages(false);
-			Screens.mainMenuScreen.toggleBack(true);
-			Screens.mainMenuScreen.toggleLanguages(true);
-			Screens.mainMenuScreen.updateDimensions();
-			Screens.render();
+			Screens.mainMenuScreen.loadLanguagePanel();
 		});
 	}
 }

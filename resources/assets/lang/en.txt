@@ -24,3 +24,7 @@ German German
 Russian Russian
 coin Coin
 Spanish Spanish
+Settings Settings
+Sound Sound
+Master Master
+Music Music

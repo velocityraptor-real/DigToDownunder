@@ -24,3 +24,7 @@ German Немецкий
 Russian Русский
 coin Монета
 Spanish Испанский
+Settings Оправа
+Sound Звук
+Master Вполне
+Music Музыика

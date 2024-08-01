@@ -24,3 +24,7 @@ German Deutsch
 Russian Russisch
 coin Münze
 Spanish Spanisch
+Settings Einstellungen
+Sound Geräuscheinstellungen
+Master Gesamt
+Music Musik
