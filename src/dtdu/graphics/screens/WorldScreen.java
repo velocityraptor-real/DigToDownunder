@@ -51,7 +51,7 @@ public class WorldScreen extends GameScreen {
 					im = Dialogue.d.getImage();
 					if(im != null) gr.drawImage(im, 1, y, (i.getWidth() >> 2) - 2, (i.getHeight() >> 2) - 2, null);
 					gr.setFont(font);
-					Screens.drawText(speechText, gr, i.getWidth() >> 2, y - (i.getHeight() >> 5), 18);
+					Screens.drawText(speechText, gr, i.getWidth() >> 2, y - (i.getHeight() >> 5), 30);
 				} else if(hearText != null && !hearText.isEmpty()) {
 					gr.setColor(Textures.speechbox_blue);
 					gr.fillRect(1, 1, i.getWidth() - 2, (i.getHeight() >> 2) - 2);
@@ -60,7 +60,7 @@ public class WorldScreen extends GameScreen {
 					im = Dialogue.d.getImage();
 					if(im != null) gr.drawImage(im, 1, 1, (i.getWidth() >> 2) - 2, (i.getHeight() >> 2) - 2, null);
 					gr.setFont(font);
-					Screens.drawText(hearText, gr, i.getWidth() >> 2, i.getHeight() >> 4, 18);
+					Screens.drawText(hearText, gr, i.getWidth() >> 2, i.getHeight() >> 4, 30);
 				} if(Save.player == null || Save.scene.isFilledRender()) graphics.drawImage(i, 0, 0, getWidth(), getHeight(), this);
 				else {
 					if(i.getWidth() * zoom < getWidth()) zoom = (float) getWidth() / (float) i.getWidth();
@@ -78,7 +78,7 @@ public class WorldScreen extends GameScreen {
 	}
 	@Override
 	protected void updateDimensions(int width, int height) {
-		font = Textures.getFont(width, height);
+		font = Textures.getFont(width >> 1, height >> 1);
 		super.updateDimensions(width, height);
 	}
 }

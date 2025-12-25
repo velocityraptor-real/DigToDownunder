@@ -62,15 +62,17 @@ public enum Scene {
 			ArrayList<Individual> map = new ArrayList<>();
 			map.add(((IndividualCreator) Registry.get("pianist")).create(11F, 0.5F, null));
 			IndividualCreator chairs = ((IndividualCreator) Registry.get("chair"));
-			map.add(chairs.create(1.55F, 1.5F, new byte[] {1}));
-			map.add(chairs.create(4.63F, 1.5F, new byte[] {1}));
-			map.add(chairs.create(7.45F, 1.5F, new byte[] {0}));
-			map.add(chairs.create(4.5F, 2.5F, new byte[] {1}));
+			byte[] left = new byte[] {0}, right = new byte[] {1};
+			map.add(chairs.create(1.55F, 1.5F,right));
+			map.add(chairs.create(4.63F, 1.5F, right));
+			map.add(chairs.create(7.45F, 1.5F, left));
+			map.add(chairs.create(4.5F, 2.5F, right));
 			map.add(((IndividualCreator) Registry.get("player")).create(4F, 4F, null));
-			map.add(chairs.create(4.5F, 6.5F, new byte[] {1}));
-			map.add(chairs.create(7.45F, 7.47F, new byte[] {0}));
-			map.add(chairs.create(1.55F, 7.5F, new byte[] {1}));
-			map.add(chairs.create(3.48F, 7.5F, new byte[] {0}));
+			map.add(chairs.create(4.5F, 6.5F, right));
+			map.add(chairs.create(7.45F, 7.47F, left));
+			map.add(chairs.create(1.55F, 7.5F, right));
+			map.add(chairs.create(3.48F, 7.5F, left));
+			map.sort(null);
 			return map;
 		}
 		@Override

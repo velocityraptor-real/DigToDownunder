@@ -1,5 +1,5 @@
-threecoins Ты получили три монеты
-gamepaused Игра на паузи
+threecoins Ты получил 3 монеты
+gamepaused Игра на паузе
 HP Жизнь
 AP Броня
 Drop Отпустит

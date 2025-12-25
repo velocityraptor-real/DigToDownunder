@@ -16,9 +16,9 @@ public class Mathe {
 				while(j < i && (v = array.get(++j)).compareTo(value) == 0) if(v == value) {
 					array.remove(j);
 					return;
-				} System.err.println(value + " not in Array!");
+				} //System.err.println(value + " not in Array!");
 			}
-		} else System.err.println(value + " not in Array!");
+		} //else System.err.println(value + " not in Array!");
 	}
 	public static <T extends Comparable<T>> int binarySearch(List<T> array, T value) {
 		synchronized(array) {if(array.size() > 0) {
